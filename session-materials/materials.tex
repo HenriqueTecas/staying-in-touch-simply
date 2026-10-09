@@ -1,0 +1,164 @@
+% Printable materials for co-design sessions 1 and 2.
+% Build:  tectonic materials.tex   ->  materials.pdf (A4 landscape; scale pages 2 and 10 to A3)
+\documentclass{article}
+\usepackage[a4paper, landscape, margin=0mm]{geometry}
+\usepackage[sfdefault]{FiraSans}
+\usepackage{fontawesome5}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+% Never hyphenate words on the cards.
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+\definecolor{coral}{HTML}{E4572E}
+\definecolor{ink}{HTML}{1F1A24}
+\definecolor{muted}{HTML}{6B6478}
+\definecolor{teal}{HTML}{17766B}
+\definecolor{easy}{HTML}{2E9E4F}
+\definecolor{hard}{HTML}{D7263D}
+\definecolor{cut}{HTML}{B9B4C4}
+
+% One A6 action card. #1 column (0-1), #2 row (0-1), #3 icon, #4 Portuguese, #5 English.
+\newcommand{\actioncard}[5]{%
+  \begin{scope}[shift={($(current page.north west)+(#1*148.5mm,-#2*105mm)$)}]
+    \node[text=coral] at (74.25mm,-30mm) {\fontsize{60}{60}\selectfont #3};
+    \node[text=ink, align=center, text width=128mm, font=\fontsize{30}{34}\selectfont\bfseries] at (74.25mm,-64mm) {#4};
+    \node[text=muted, align=center, text width=128mm, font=\fontsize{14}{16}\selectfont] at (74.25mm,-92mm) {#5};
+  \end{scope}}
+
+% Dashed cut lines for a 2 x 2 grid of A6 cards.
+\newcommand{\cutgrid}{%
+  \draw[cut, dashed, line width=0.6pt] ($(current page.north west)+(148.5mm,0)$) -- ++(0,-210mm);
+  \draw[cut, dashed, line width=0.6pt] ($(current page.north west)+(0,-105mm)$) -- ++(297mm,0);}
+
+% A full-page sorting mat. #1 icon, #2 colour, #3 Portuguese, #4 English.
+\newcommand{\sortmat}[4]{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[#2, line width=3pt, rounded corners=10mm] ($(current page.north west)+(12mm,-12mm)$) rectangle ++(273mm,-186mm);
+    \node[text=#2] at ($(current page.north west)+(148.5mm,-70mm)$) {\fontsize{90}{90}\selectfont #1};
+    \node[text=ink, font=\fontsize{80}{84}\selectfont\bfseries] at ($(current page.north west)+(148.5mm,-128mm)$) {#3};
+    \node[text=muted, font=\fontsize{24}{26}\selectfont] at ($(current page.north west)+(148.5mm,-160mm)$) {#4};
+  \end{tikzpicture}\null\newpage}
+
+\begin{document}
+
+% ---------------------------------------------------------------- 1. Print list
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north west, text width=250mm, align=left, text=ink] at ($(current page.north west)+(22mm,-20mm)$) {%
+    {\fontsize{30}{34}\selectfont\bfseries Session materials}\\[2mm]
+    {\fontsize{14}{18}\selectfont\color{muted} Co-design sessions 1 and 2 \textperiodcentered{} print list for the team}\\[10mm]
+    \fontsize{15}{24}\selectfont
+    \begin{tabular}{@{}r@{\hspace{5mm}}p{78mm}@{\hspace{5mm}}l@{\hspace{5mm}}l@{}}
+      \textbf{Page} & \textbf{What} & \textbf{Session} & \textbf{How to print} \\[1mm]
+      2 & Communication map & 1 & A3 (scale 141\%), 2 copies \\
+      3--6 & Action cards (16) & 2 & Thick card; cut on the dashed lines \\
+      7 & Blank cards & 2 & Thick card, 3 copies \\
+      8--10 & Sorting mats & 2 & A4, 1 each \\
+      11 & Storyboard & 2 & A3 (scale 141\%), 2 copies \\
+      12 & Phone templates (actual size) & 2 & Thick card; cut out the outline and the window \\
+    \end{tabular}\\[10mm]
+    {\fontsize{13}{18}\selectfont\color{muted} Also bring: the project declaration (2 copies, large type), green and red dot stickers, round sticker buttons (20--40 mm), thick markers, glue sticks, and the three 3D-printed mock-ups. Pre-cut everything before the session.}};
+\end{tikzpicture}\null\newpage
+
+% ---------------------------------------------------------------- 2. Communication map
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (c) at ($(current page.north west)+(172mm,-105mm)$);
+  \fill[coral!7] (c) circle (92mm);
+  \fill[coral!12] (c) circle (72mm);
+  \fill[coral!18] (c) circle (50mm);
+  \draw[coral!60, line width=0.8pt] (c) circle (92mm);
+  \draw[coral!60, line width=0.8pt] (c) circle (72mm);
+  \draw[coral!60, line width=0.8pt] (c) circle (50mm);
+  \fill[coral] (c) circle (22mm);
+  \node[text=white, font=\fontsize{40}{40}\selectfont\bfseries] at (c) {Eu};
+  \node[text=ink, font=\fontsize{13}{13}\selectfont\bfseries] at ($(c)+(0,36mm)$) {Todos os dias};
+  \node[text=ink, font=\fontsize{13}{13}\selectfont\bfseries] at ($(c)+(0,61mm)$) {Todas as semanas};
+  \node[text=ink, font=\fontsize{13}{13}\selectfont\bfseries] at ($(c)+(0,82mm)$) {\`As vezes};
+  \node[anchor=north west, text=ink, align=left, text width=70mm] at ($(current page.north west)+(12mm,-12mm)$) {%
+    {\fontsize{30}{34}\selectfont\bfseries Com quem fala?}\\[2mm]
+    {\fontsize{12}{14}\selectfont\color{muted} Who do you talk to? Place each person by how often you talk.}};
+  \node[anchor=south west, text=ink] at ($(current page.north west)+(12mm,-198mm)$) {%
+    \fontsize{17}{17}\selectfont
+    \renewcommand{\arraystretch}{1.7}%
+    \begin{tabular}{@{}c@{\enspace}l@{}}
+      {\color{easy}\faCircle} & f\'acil {\color{muted}\small (easy)} \\
+      {\color{hard}\faCircle} & dif\'icil {\color{muted}\small (hard)} \\[2mm]
+      \faPhone & chamada \\
+      \faCommentDots & mensagem \\
+      \faVideo & videochamada \\
+      \faHome & visita \\
+    \end{tabular}};
+\end{tikzpicture}\null\newpage
+
+% ---------------------------------------------------------------- 3-6. Action cards
+\begin{tikzpicture}[remember picture, overlay]
+  \cutgrid
+  \actioncard{0}{0}{\faPhone}{Ligar a algu\'em}{Call someone}
+  \actioncard{1}{0}{\faPhoneVolume}{Atender chamadas}{Answer calls}
+  \actioncard{0}{1}{\faVolumeUp}{Ouvir mensagens em voz alta}{Hear messages read aloud}
+  \actioncard{1}{1}{\faMicrophone}{Enviar mensagem a falar}{Send a message by speaking}
+\end{tikzpicture}\null\newpage
+\begin{tikzpicture}[remember picture, overlay]
+  \cutgrid
+  \actioncard{0}{0}{\faPills}{Lembrar os medicamentos}{Medication reminders}
+  \actioncard{1}{0}{\faCalendarCheck}{Lembrar consultas}{Appointment reminders}
+  \actioncard{0}{1}{\faExclamationTriangle}{Saber se uma mensagem \'e burla}{Spot a scam message}
+  \actioncard{1}{1}{\faAmbulance}{Pedir ajuda numa emerg\^encia}{Get help in an emergency}
+\end{tikzpicture}\null\newpage
+\begin{tikzpicture}[remember picture, overlay]
+  \cutgrid
+  \actioncard{0}{0}{\faImages}{Ver fotografias da fam\'ilia}{See family photos}
+  \actioncard{1}{0}{\faVideo}{Videochamada}{Video call}
+  \actioncard{0}{1}{\faClock}{Ver as horas e o dia}{See the time and date}
+  \actioncard{1}{1}{\faLightbulb}{Lanterna}{Torch}
+\end{tikzpicture}\null\newpage
+\begin{tikzpicture}[remember picture, overlay]
+  \cutgrid
+  \actioncard{0}{0}{\faBroadcastTower}{Ouvir r\'adio}{Listen to the radio}
+  \actioncard{1}{0}{\faCamera}{Tirar fotografias}{Take photos}
+  \actioncard{0}{1}{\faCloudSun}{Saber o tempo}{Check the weather}
+  \actioncard{1}{1}{\faSearchPlus}{Ler letras pequenas}{Read small print (magnifier)}
+\end{tikzpicture}\null\newpage
+
+% ---------------------------------------------------------------- 7. Blank cards
+\begin{tikzpicture}[remember picture, overlay]
+  \cutgrid
+  \foreach \col/\row in {0/0, 1/0, 0/1, 1/1} {
+    \node[text=muted, font=\fontsize{12}{14}\selectfont] at ($(current page.north west)+(\col*148.5mm+74.25mm,-\row*105mm-94mm)$) {A sua ideia \textperiodcentered{} your idea};
+  }
+\end{tikzpicture}\null\newpage
+
+% ---------------------------------------------------------------- 8-10. Sorting mats
+\sortmat{\faCheckCircle}{teal}{Preciso}{I need this}
+\sortmat{\faStar}{coral}{Gostava}{I would like this}
+\sortmat{\faTimesCircle}{muted}{N\~ao preciso}{I don't need this}
+
+% ---------------------------------------------------------------- 11. Storyboard
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north west, text=ink, font=\fontsize{20}{22}\selectfont\bfseries] at ($(current page.north west)+(12mm,-9mm)$) {A hist\'oria {\fontsize{12}{14}\selectfont\mdseries\color{muted}\enspace the story, in four steps}};
+  \foreach \i/\col/\row/\pt/\en in {%
+      1/0/0/Quando\ldots/When\ldots,
+      2/1/0/Carrego\ldots/I press\ldots,
+      3/0/1/O telem\'ovel\ldots/The phone\ldots,
+      4/1/1/Depois\ldots/Then\ldots} {
+    \draw[coral, line width=1.2pt, rounded corners=5mm] ($(current page.north west)+(12mm+\col*141.5mm,-24mm-\row*92mm)$) rectangle ++(132mm,-83mm);
+    \node[anchor=north west, text=ink, font=\fontsize{20}{22}\selectfont\bfseries] at ($(current page.north west)+(18mm+\col*141.5mm,-29mm-\row*92mm)$) {\i\enspace\pt};
+    \node[anchor=north east, text=muted, font=\fontsize{11}{13}\selectfont] at ($(current page.north west)+(138mm+\col*141.5mm,-31mm-\row*92mm)$) {\en};
+  }
+\end{tikzpicture}\null\newpage
+
+% ---------------------------------------------------------------- 12. Phone templates (actual size)
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north west, text=ink, font=\fontsize{16}{18}\selectfont\bfseries] at ($(current page.north west)+(12mm,-8mm)$) {Recortar {\fontsize{11}{13}\selectfont\mdseries\color{muted}\enspace cut out the outline and the window \textperiodcentered{} print at 100\% on thick card}};
+  % #1 centre x, width, height, button diameter, label
+  \foreach \cx/\w/\h/\b/\name in {52/62/128/18/Pequeno, 144/72/150/20/M\'edio, 240/80/170/22/Grande} {
+    \draw[ink, line width=1pt, rounded corners=8mm] ($(current page.north west)+(\cx mm-\w mm/2,-20mm)$) rectangle ++(\w mm,-\h mm);
+    \draw[coral, dashed, line width=1pt, rounded corners=2mm] ($(current page.north west)+(\cx mm-\w mm/2+5mm,-32mm)$) rectangle ++(\w mm-10mm,-0.55*\h mm);
+    \draw[coral, dashed, line width=1pt] ($(current page.north west)+(\cx mm,-20mm-0.82*\h mm)$) circle (\b mm/2);
+    \node[text=ink, font=\fontsize{13}{15}\selectfont\bfseries, anchor=north] at ($(current page.north west)+(\cx mm,-23mm-\h mm)$) {\name};
+  }
+\end{tikzpicture}\null
+
+\end{document}

@@ -1,0 +1,295 @@
+% Mid-term draft of the research paper (ACM acmart, same style as the course template).
+% Build locally:  tectonic main.tex     (or upload this folder to Overleaf)
+% Red [square-bracket] text marks what the team must fill in from the co-design sessions.
+% `nonacm` removes the ACM copyright/reference blocks, which a course paper does not need.
+\documentclass[acmtog,nonacm]{acmart}
+
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+
+% Colour name in capitals: acmart upper-cases author names, which would turn `red' into `RED'.
+\definecolor{PH}{rgb}{0.80,0.05,0.05}
+\newcommand{\placeholder}[1]{{\color{PH}[#1]}}
+% Ragged-right table column of a given width.
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+\title{Staying in Touch, Simply}
+\subtitle{Co-Designing a Way for an Older Adult to Use His Smartphone (mid-term draft)}
+
+\author{Henrique Rodrigues}
+\affiliation{%
+  \institution{Instituto Superior T\'ecnico, Universidade de Lisboa}
+  \city{Lisbon}
+  \country{Portugal}}
+\author{Jo\~ao Rocha}
+\affiliation{%
+  \institution{Instituto Superior T\'ecnico, Universidade de Lisboa}
+  \city{Lisbon}
+  \country{Portugal}}
+
+\renewcommand{\shortauthors}{Rodrigues and Rocha}
+
+\begin{abstract}
+Smartphones are now the main way many families stay in touch, yet many older adults cannot use them. We report the first half of a seven-week project in which we co-design with Manuel (a pseudonym), an 80-year-old man in Lisbon who calls his family every day on a button phone but cannot use the smartphone his daughter bought him so he could join the family's WhatsApp group. He does not want a simpler phone: he wants what the smartphone holds, his family's photos, messages and news, without having to learn how to work it. Over two sessions following the Double Diamond, we framed the problem with him: he needs to see the newest photos of his great-grandson, hear the group's news and reply with a short sentence, without learning the smartphone, and he needs the sender's name first, because of scams. In the second session he sorted 16 action cards, rejected two of our three forms and chose a plain cover over his own smartphone, with one large window, a green button to talk and a red one to end. This draft also presents related work and secondary research on ageing and digital inclusion in Portugal.
+\end{abstract}
+
+\ccsdesc[500]{Human-centered computing~Accessibility technologies}
+\ccsdesc[300]{Human-centered computing~Participatory design}
+\ccsdesc[300]{Human-centered computing~Mobile devices}
+
+\keywords{co-design, older adults, inclusive design, mobile phones, voice interaction, tangible interfaces}
+
+\maketitle
+
+\section{Introduction}
+Phones have become the main way many people stay in touch with family and reach everyday services. For older adults, this shift brings connection but also exclusion: smartphones have small targets, layered menus and frequent updates, which make them hard to learn and easy to get wrong~\cite{kurniawan2008older, leung2012older}. Portugal makes this pressing: it has the second-oldest population in the European Union~\cite{eurostat2025population}, and only about one in five people aged 65--74 has at least basic digital skills~\cite{eurostat2025digitalskills}.
+
+Products that simplify phones for older people already exist, from dedicated senior phones to simplified modes on mainstream smartphones (Section~\ref{sec:secondary}). However, they are mostly designed \emph{for} older adults rather than \emph{with} them, many still depend on touchscreen dexterity, and products that mark their users as frail are often rejected~\cite{shinohara2011shadow, pullin2009design}.
+
+We take a co-design approach~\cite{sanders2008cocreation}. We work with one older adult in Lisbon, Manuel (a pseudonym), as an equal partner and the expert on his own experience. Over three sessions following the Double Diamond~\cite{designcouncil2004double}, we explore how he communicates by phone today, define a specific need together, generate and choose ideas together, and test a high-fidelity prototype in his home. Our team's initial direction was a 3D-printed shell that keeps what a smartphone can do but makes it simpler to use, with a window that shows only part of the screen and one large physical button for speaking to the phone. We brought it to the second session as one of three options; Manuel rejected the other two and changed this one (Section~\ref{sec:findings}).
+
+This mid-term draft covers the first two sessions: related work (Section~\ref{sec:related}), our methodology and how we adapted it (Section~\ref{sec:method}), secondary research on ageing, digital inclusion and existing products (Section~\ref{sec:secondary}), findings from sessions 1 and 2 (Section~\ref{sec:findings}) and our plan for the prototype and the third session (Section~\ref{sec:next}). The final paper will contribute (1)~an account of a co-design process adapted to an older co-designer, (2)~a demoable high-fidelity prototype, and (3)~lessons for designing simpler phone communication with older adults.
+
+\section{Related Work}\label{sec:related}
+
+\subsection{Older adults and mobile phones}
+Older adults are often portrayed as reluctant technology users, but the evidence is more nuanced. In focus groups with 113 older adults, likes outnumbered dislikes, and dislikes centred on inconvenience, unhelpful features and security~\cite{mitzner2010older}. In a survey of 1,204 adults, the link between age and technology adoption was mediated by computer anxiety, self-efficacy and cognitive abilities rather than by age itself~\cite{czaja2006factors}. For mobile phones, older people were found to be mostly passive users who feared the consequences of using unfamiliar technology~\cite{kurniawan2008older}, and their preference for learning by trial and error drops with age~\cite{leung2012older}. Touch input adds difficulty: in a study at our institution, older adults' text-entry errors on touchscreens correlated strongly with hand tremor~\cite{nicolau2012elderly}. These findings suggest reducing what must be learned and the fear of making mistakes, rather than adding features.
+
+\subsection{Voice interaction and older adults}
+Voice assistants promise access without screens. People with a range of disabilities, including impairments common in later life, use smart speakers, although discovering what the device can do remains hard~\cite{pradhan2018accessibility}. Older adults who rarely use technology kept using a smart speaker to look up information over three weeks, but rarely relied on its reminders because they doubted their reliability~\cite{pradhan2020use}. Over 16 weeks, the benefits older adults perceived shifted from convenience to not worrying about making mistakes, while the main challenge became coping with recognition errors~\cite{kim2021exploring}. Open-ended assistants are also abandoned: most of 38 long-time Echo owners had stopped using it, mainly because they struggled to find valuable uses~\cite{trajkova2020alexa}, and early pilots report similar barriers~\cite{kowalski2019older}. A voice interface for our co-designer should therefore cover a few tasks they value, make its capabilities visible and recover gracefully from misunderstandings. A push-to-talk button also makes explicit when the device is listening.
+
+\subsection{Simplified phones and the stigma of designing for age}
+Commercial senior launchers replace a smartphone's home screen with fewer, larger elements. A heuristic evaluation found that they mostly offered basic features and a single assistive function, an SOS service, and that reducing features alone did not guarantee usability: error recovery and access through several senses remained weak~\cite{petrovcic2018smart}. Accessibility checklists for older adults' mobile interfaces offer concrete criteria for such screens~\cite{diazbossini2014accessibility}. Visual style matters too: older adults performed worse with flat designs and preferred skeuomorphic interfaces whose controls look pressable~\cite{urbano2022skeuomorphism}, which we take as a further argument for a physical button. Yet devices that signal age or disability carry social costs. Assistive technologies can mark their users as disabled~\cite{shinohara2011shadow}, older test users rejected a prototype health robot as ``not for me''~\cite{neven2010obviously}, and HCI itself has often framed ageing as a problem of decline~\cite{vines2015age}. Pullin argues that such products should draw on mainstream design culture, as eyeglasses did~\cite{pullin2009design}. Our shell should therefore look like a designed object its owner is proud of, not a medical aid.
+
+\subsection{Co-designing with older adults}
+Co-design treats the people formerly known as users as co-creators, with designers providing tools for their expression~\cite{sanders2008cocreation}. Lindsay et al. argue that designers are poorly equipped to design for older people and describe how to engage them early through participatory design~\cite{lindsay2012engaging}. Generative methods help participants imagine beyond current technology: cultural probes gathered inspirational fragments of older people's daily lives~\cite{gaver1999cultural}, magic machines let participants express desires by making open-ended objects~\cite{andersen2019magic}, and retirees building with a maker toolkit proved inventive, collaborative designers~\cite{rogers2014never}. Tangible interfaces suit such making, yet a review found little work on tangible interfaces for older people's social interaction and recommended involving them from design to evaluation~\cite{bong2018tangible}. The Messaging Kettle showed the promise of building communication into a familiar object, and the need for simple and varied ways to communicate~\cite{brereton2015messaging}. Finally, a device that places calls and reads messages aloud must protect against scams: older adults are aware of fraud but often manage the risk by avoiding technology~\cite{frik2019privacy}, which motivates restricting actions to known contacts.
+
+Our project sits where these strands meet. With one older adult, we co-design a narrowly scoped voice interface combined with a physical button and a simplified screen, and we treat social acceptability and protection from scams as requirements from the start.
+
+
+\section{Methodology}\label{sec:method}
+
+\subsection{Approach}
+We follow a co-design approach, in which the people who will use a design take part in creating it and designers act as facilitators who give them tools for expression~\cite{sanders2008cocreation}. We structure the project with the Double Diamond~\cite{designcouncil2004double}: the first diamond explores and then defines the problem, and the second develops and then delivers a solution (Figure~\ref{fig:diamond}). Each of our three sessions with the co-designer maps onto this process, and our team iterates on the prototype between the second and third sessions.
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[x=0.95cm, y=0.95cm, font=\footnotesize]
+    \draw[thick] (0,0) -- (2,1.1) -- (4,0) -- (2,-1.1) -- cycle;
+    \draw[thick] (4,0) -- (6,1.1) -- (8,0) -- (6,-1.1) -- cycle;
+    \draw[dashed, gray] (2,1.1) -- (2,-1.1);
+    \draw[dashed, gray] (6,1.1) -- (6,-1.1);
+    \node at (1.12,0) {Discover};
+    \node at (2.88,0) {Define};
+    \node at (5.12,0) {Develop};
+    \node at (6.88,0) {Deliver};
+    \fill (4,0) circle (2pt);
+    \node[align=center, font=\scriptsize] at (4,0.62) {problem\\statement};
+    \draw[decorate, decoration={brace, mirror, amplitude=4pt}] (0.1,-1.3) -- (3.9,-1.3)
+      node[midway, below=5pt] {Session 1};
+    \draw[decorate, decoration={brace, mirror, amplitude=4pt}] (4.1,-1.3) -- (5.95,-1.3)
+      node[midway, below=5pt] {Session 2};
+    \draw[decorate, decoration={brace, mirror, amplitude=4pt}] (6.05,-1.3) -- (7.9,-1.3)
+      node[midway, below=5pt] {Session 3};
+  \end{tikzpicture}
+  \caption{Our three co-design sessions mapped onto the Double Diamond. Session~1 explores and defines the problem and ends with a signed problem statement; session~2 generates and selects ideas; session~3 tests the prototype.}
+  \Description{Two diamonds side by side, divided into four stages labelled Discover, Define, Develop and Deliver. The point where the diamonds meet is labelled problem statement. Braces underneath mark Session 1 under the whole first diamond, Session 2 under Develop and Session 3 under Deliver.}
+  \label{fig:diamond}
+\end{figure}
+
+\subsection{Co-designer}
+Manuel (a pseudonym he agreed to) is 80, a widower and a retired electrician, and lives alone in Lisbon. His daughter introduced him to us. He plays bisca, a Portuguese card game, at the caf\'e every day and has Sunday lunch at his daughter's. His family includes a daughter, a son, a sister, grandchildren and two great-grandchildren: a girl of two and a boy born seven weeks before our first session. He calls his family every day on a button phone he has used for years. In July, his daughter bought him a Samsung smartphone so he could join the family's WhatsApp group; we found it in a drawer, uncharged, with its PIN on a note in her handwriting. He fits the brief as an older adult left out of the channel his family now uses to share news and photos.
+
+\subsection{Sessions}
+Both sessions took place in Manuel's kitchen, in the afternoon, on days he chose (Table~\ref{tab:sessions}). Each lasted about 70 minutes, longer than planned, because he chose to finish. The first author facilitated and was the only one to ask questions unless he handed over a turn; the second author took notes, ran the recorder, handled materials and, in session~2, voiced the phone.
+
+\emph{Session 1 (Discover and Define).} Manuel set the terms before we asked anything: we played two hands of bisca with the recorder off, and only then read the consent section of the declaration aloud, putting its formal sentences into plain Portuguese. We then used directed storytelling about recent episodes, a phone tour of both his phones, and the communication map, on which he placed every dot himself (Figure~\ref{fig:session1}). We ended by drafting the problem statement, which he corrected twice before signing, and a short magic machine question~\cite{andersen2019magic}.
+
+\emph{Session 2 (Develop).} We read back his signed statement and three of his quotes, and he confirmed them. He sorted the 16 illustrated action cards into \emph{need}, \emph{would like} and \emph{don't need}, and wrote two blank cards of his own (Table~\ref{tab:cards}). He then chose among three cardboard templates, placed sticker buttons, and compared three empty 3D-printed mock-ups: a slim bumper with a button, a full cover with a screen window and a separate box. In an experience-prototyping role-play, he pressed a cardboard button and spoke while the second author voiced the phone, across five scenarios and one deliberate misunderstanding. He closed by narrating a four-panel storyboard, which the second author drew.
+
+\emph{Session 3 (Deliver)} will test our high-fidelity prototype in Manuel's kitchen. A teammate will steer the prototype behind the scenes when it misunderstands, in the style of a Wizard-of-Oz study~\cite{dahlback1993wizard}. He will try the scenarios from his storyboard while thinking aloud, and we will close with ``I like, I wish, what if'' feedback.
+
+\begin{table*}[t]
+  \caption{The three co-design sessions: sessions 1 and 2 as run (about 70 minutes each), session 3 as planned.}
+  \label{tab:sessions}
+  \small
+  \begin{tabular}{@{}L{0.06\textwidth}L{0.11\textwidth}L{0.19\textwidth}L{0.36\textwidth}L{0.16\textwidth}@{}}
+    \toprule
+    Session & Stage & Goal & Methods and materials & Output \\
+    \midrule
+    1 & Discover, Define & Understand phone communication today and agree on one need & A card game he hosted, recorder off; consent read aloud; directed storytelling; phone tour of both his phones; communication map (A3 sheet, green and red dots); magic machine question & Signed declaration and problem statement; map; quotes \\
+    \addlinespace
+    2 & Develop & Create and choose a concept together & Read-back of his statement and quotes; card sorting (16 cards plus 2 he wrote); three cardboard templates with sticker buttons; three empty 3D-printed mock-ups; role-play with a teammate as the phone's voice; four-panel storyboard & Ranked actions; chosen form and buttons; rules for the voice; storyboard \\
+    \addlinespace
+    3 & Deliver & Test the prototype & Test at home with a teammate steering behind the scenes; four scenarios from session 2; think-aloud; ``I like, I wish, what if'' cards & Feedback; lessons; improvements \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Adapting the methods to our co-designer}
+We adapted the methods to Manuel rather than the reverse. We let him host before we asked anything, read the consent form aloud in plain words, and kept to one questioner at a time, which he enforced. When we touched his smartphone, we said each step aloud and asked before using its PIN. Materials were printed in large type on pre-cut card, and we wrote for him whenever he asked. The map and the cards let him refuse categories, and he did: his friend at the caf\'e was ``not a phone'', and his great-grandson went on the fridge side of the map because ``the baby does not have a phone''. Every activity offered blank cards and a ``none of these'' option, so he was not steered towards our initial direction.
+
+\subsection{Data collection and analysis}
+With Manuel's consent, we took notes that keep quotes, observations and our interpretations apart; recorded audio that stays with the team; and photographed his hands, phones and materials, never his face. After each session we held a 30-minute debrief on key insights, surprises, wrong assumptions and which methods worked. We analyse the material with affinity diagramming and reflexive thematic analysis~\cite{braun2006using}, revisiting the themes as each session adds data. Quotes are our translations from Portuguese, and we refer to family members by their relationship to Manuel.
+
+\subsection{Ethics}
+Participation is voluntary and is set out in the project declaration, which the co-designer and the team sign. It explains the time involved, the right to skip any activity or withdraw at any time, how notes, photographs and recordings are used, and that the paper uses a pseudonym. Recordings are kept by the team and deleted by \placeholder{date}.
+
+\section{Secondary Research}\label{sec:secondary}
+Before the first session, we gathered official statistics on ageing and digital inclusion in Portugal (Table~\ref{tab:stats}) and reviewed products that already simplify phones for older people (Table~\ref{tab:products}).
+
+\begin{table}[t]
+  \caption{Older adults and digital inclusion, Portugal against the EU-27. Eurostat data for 2025; population on 1 January 2025~\cite{eurostat2025population, eurostat2025internet, eurostat2025digitalskills, eurostat2025devices, eurostat2025activities, eurostat2025livingalone}.}
+  \label{tab:stats}
+  \small
+  \begin{tabular}{@{}L{0.62\columnwidth}rr@{}}
+    \toprule
+    Indicator & Portugal & EU-27 \\
+    \midrule
+    Population aged 65 or over & 24.3\% & 22.0\% \\
+    Used the internet, ages 65--74 & 60.7\% & 79.0\% \\
+    Never used the internet, ages 65--74 & 36.1\% & 16.4\% \\
+    At least basic digital skills, ages 65--74 & 20.7\% & 33.0\% \\
+    Internet on a mobile phone, ages 65--74 & 57.7\% & 70.3\% \\
+    Instant messaging, internet users aged 65--74 & 79.8\% & 74.5\% \\
+    Calls over the internet, internet users aged 65--74 & 70.5\% & 66.2\% \\
+    People aged 65 or over living alone & 25.7\% & 32.2\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Ageing and digital inclusion in Portugal}
+Portugal has the second-oldest population in the EU: on 1 January 2025, 24.3\% of residents were 65 or older, against 22.0\% in the EU-27~\cite{eurostat2025population}, and national projections reach 34.5\% by 2050~\cite{ine2025projecoes}. Older Portuguese adults are also less connected than their European peers. Among people aged 65--74, 36.1\% have never used the internet, more than twice the EU share~\cite{eurostat2025internet}, and only 20.7\% have at least basic digital skills, against 33.0\% in the EU, even though the two are nearly equal across all ages~\cite{eurostat2025digitalskills}. Yet those who are online communicate more than the EU average: 79.8\% of internet users aged 65--74 use instant messaging and 70.5\% make calls over the internet~\cite{eurostat2025activities}. For older people who make it online, staying in touch is a central use. No official survey measures technology use after 74; a commercial survey estimates that 56\% of all people aged 65 or over used the internet in 2024~\cite{marktest2024bareme}.
+
+Many older people also live alone. In the 2021 census, 517,146 one-person households were people aged 65 or over~\cite{ine2024estruturas}; in 2025, a quarter of people aged 65 or over lived alone, and a third of women~\cite{eurostat2025livingalone}. The National Republican Guard (GNR) flagged 43,074 older people as living alone, isolated or vulnerable in 2025~\cite{gnr2025balanco}. Phones are also a channel for fraud: from January to August 2026, the GNR recorded 2,720 frauds against older people in its area~\cite{gnr2026censos}. Common schemes include the ``Ol\'a pai, ol\'a m\~ae'' WhatsApp scam, in which fraudsters pose as a son or daughter and avoid voice calls~\cite{tsf2023olapai}, and scams that trick people into MB WAY payments~\cite{sapo2025mbway}.
+
+\subsection{Existing products and approaches}
+Current products simplify phones in four ways (Table~\ref{tab:products}). Senior phones and launchers reduce the screen but keep a full smartphone underneath. Built-in simplified modes change how the phone looks, not what it does. Smart speakers and companion robots replace the screen with voice, but none of the mainstream assistants supports European Portuguese, and they stay in one room. Telecare buttons reduce interaction to a single press, but only for emergencies. The Clicks keyboard case shows that a case can plug into a phone's port to add physical controls while letting charging pass through, which is close to our initial direction.
+
+\begin{table*}[t]
+  \caption{Products that simplify phones or communication for older people, as described by their makers and checked on 5 October 2026.}
+  \label{tab:products}
+  \small
+  \begin{tabular}{@{}L{0.17\textwidth}L{0.33\textwidth}L{0.1\textwidth}L{0.34\textwidth}@{}}
+    \toprule
+    Product & How it simplifies & Input & Limitation for our co-designer \\
+    \midrule
+    Doro Aurora senior smartphones~\cite{doro2026aurora} & Simplified interface, physical call and home keys, and a button that alerts chosen contacts & Touch, keys & A full Android phone underneath, with apps, updates and notifications; the alert must be set up in advance \\
+    \addlinespace
+    Apple Assistive Access~\cite{apple2023assistiveaccess, apple2026aaapps} & Built-in reduced iPhone interface, set up by a trusted supporter; leaving it needs a passcode & Touch, optional Siri & Needs an iPhone and a carer to set it up; apps not adapted to it, such as WhatsApp, keep their usual design \\
+    \addlinespace
+    Samsung Easy mode, Pixel Simple View~\cite{samsung2026easymode, google2024pixeldrop} & Larger icons, text and spacing; longer touch-and-hold delay on Samsung & Touch & Changes presentation only: the same apps, notifications and settings remain \\
+    \addlinespace
+    BIG Launcher~\cite{biglauncher2026} & Replacement home screen with very large buttons, down to a single one; settings locked with a PIN & Touch & Other apps keep their normal interface; a carer must set it up \\
+    \addlinespace
+    Alexa and Google Nest speakers~\cite{pplware2021alexa, amazon2026alexalanguages, google2026nestlanguages} & Hands-free calls, reminders and music by voice & Voice & No European Portuguese: Alexa runs in US English in Portugal and Nest speakers support only Brazilian Portuguese; tied to one room \\
+    \addlinespace
+    ElliQ companion robot~\cite{elliq2026membership} & Tabletop companion that starts conversations, gives reminders and makes video calls & Voice, touch & Sold only in the US, in English, with a monthly subscription; not a phone \\
+    \addlinespace
+    Cruz Vermelha teleassistance~\cite{cvp2026teleassistencia} & One emergency button connected to a 24-hour centre, plus regular follow-up calls & One button & Emergencies only, with no contacts or messages; monthly fee \\
+    \addlinespace
+    Clicks keyboard case~\cite{clicks2026support} & Case that plugs into the phone's port and adds physical keys, with charging passed through & Physical keys & Designed for typing; fits only specific phone models \\
+    \addlinespace
+    Light Phone III~\cite{light2026phoneiii, engadget2025lightphone} & Minimal phone with a short list of tools instead of apps & Touch, buttons & No third-party apps such as WhatsApp; expensive; not designed for older users \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Design opportunities}
+We treated the following as hypotheses to test with Manuel, not as requirements; Section~\ref{sec:findings} reports what he confirmed and changed.
+\begin{itemize}
+  \item \emph{Few actions, set up by family.} Low digital skills and the setup model of Assistive Access and BIG Launcher suggest a small, fixed set of actions configured by a trusted helper, with everything else physically hidden.
+  \item \emph{Build on the channels families already use.} Older internet users in Portugal message and call more than the EU average, so we asked which apps his family relies on: a family WhatsApp group.
+  \item \emph{European Portuguese speech is a top risk.} Mainstream assistants do not support it, so we will first prototype voice with a teammate behind the scenes, keep commands short and confirm aloud before acting.
+  \item \emph{Design fraud out.} The device should never start payments or open links, should say who sent each message, warn about unknown numbers and make calling back a saved number one press away.
+  \item \emph{Complement telecare rather than replace it.} The button should not pose as an emergency alarm, and a one-off printed shell on an existing phone avoids the subscriptions of current services.
+\end{itemize}
+
+
+\section{Early Findings}\label{sec:findings}
+We report what Manuel said and did across the two sessions, in his words where possible.
+
+\subsection{Session 1: a family in a group he cannot open}
+
+\paragraph{Calling works; the smartphone does not.} Manuel calls his daughter on his button phone in ``three presses'', using a contact she saved in capital letters, and keeps a paper list of numbers in his wallet in case it fails. ``The buttons do not move when someone at the shop decides to improve my life.'' We had assumed he needed help placing calls; he does not.
+
+\paragraph{The family moved photos and news into one group.} His family shares photos of his seven-week-old great-grandson and practical news in a WhatsApp group of about twelve people, which had 128 unread messages when we opened it. His daughter now relays the group to him by phone: ``She reports the group to me by voice, like a translator. I am the foreigner in my own family.'' When she moved his blood test by an hour, she wrote it in the group, and he arrived at the wrong time: ``She wrote Pai in a conversation with twelve people, and she thought that was telling me.'' He separates two jobs the family has merged: ``A sentence I can take by ear. A baby I need to see.''
+
+\paragraph{The barrier is being watched while failing.} At a Sunday lunch, four relatives watched him try the smartphone; a video started with his own face in a corner, and he left the table for the balcony. ``Ready is a word for people with time to look stupid in private.'' Yet he will not refuse the phone as his sister did, ``because the refusal includes the baby''. He also warned that anything resembling an emergency pendant would go ``with the Samsung in the drawer''.
+
+\paragraph{Touch gestures failed; one large photo worked.} In the phone tour, his first taps were too short, a pinch shrank the text, a mistaken tap opened the keyboard, and the side button seemed to switch the phone off. He expected the oldest message at the top, as in a book. Once a photo of his great-grandson filled the screen, he asked us to leave it: ``Do not scroll. I am looking.''
+
+\paragraph{The name before the baby.} He had received an ``ol\'a pai'' scam text on his button phone. He did not reply, and checked with his daughter using the number in his wallet, not one in the message. Since then he trusts the group less, because he cannot see who is in it: ``I still want to know the name before I see the child.'' On his communication map (Figure~\ref{fig:session1}), every call with a known name was green, and he had ``the group'' written in red across the daily ring, refusing to mark any person red: ``The red is the machine.''
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox[c][3.2cm][c]{0.9\columnwidth}{\centering\placeholder{Insert the photo of Manuel's communication map from session 1 (hands and paper only, with consent)}}}
+  \caption{Manuel's communication map from session~1. Calls with known names are green; ``the group'' runs across the daily ring in red.}
+  \Description{Photo of an A3 sheet with three rings around the word Eu (me). Names of family members and a friend are placed on the rings with green dots; the words o grupo (the group) are written in red across the inner ring.}
+  \label{fig:session1}
+\end{figure}
+
+\subsection{Problem statement}
+Manuel corrected two drafts before signing this statement (names replaced by relationships):
+\begin{quote}
+Manuel needs a way to see the new photos of his great-grandson, to hear his great-granddaughter and the family group, and to reply with a short sentence, without learning the smartphone. The group is where the baby is shown and where news is written. He needs the sender's name first, because a message that says ``ol\'a pai'' may be a scam.
+\end{quote}
+He removed wording that suggested he needed help because of his age: ``I am to be helped because the group is where they put my family.''
+
+\subsection{Session 2: what Manuel chose}
+
+\paragraph{What it should do.} Manuel kept eight cards as needs, four as wishes and six as unneeded (Table~\ref{tab:cards}). His two blank cards became the first requirements: the sender's name before any photo, and only people his daughter saved. His top three were seeing family photos, hearing messages read aloud and spotting scams: ``Do not get confused and build me a nicer Nokia. I have a Nokia. It does not contain my great-grandson.''
+
+\begin{table*}[t]
+  \caption{Manuel's card sort in session~2: 16 printed cards plus two he wrote (marked *). Conditions in parentheses are his.}
+  \label{tab:cards}
+  \small
+  \begin{tabular}{@{}L{0.36\textwidth}L{0.36\textwidth}L{0.22\textwidth}@{}}
+    \toprule
+    Need & Would like & Don't need \\
+    \midrule
+    The name before the photo* & Appointment reminders & Medication reminders \\
+    Only people his daughter saved* & Emergency help (only calling his daughter, only if he asks) & Torch \\
+    See family photos & Video call (only the baby on screen, started by them, his face hidden, an obvious red button) & Radio \\
+    Hear messages read aloud & Time and date & Take photos \\
+    Know if a message is a scam & & Weather \\
+    Call someone (only if as easy as his button phone) & & Magnifier \\
+    Answer calls (same condition) & & \\
+    Send a message by speaking (only ``ele \'e lindo'', ``sim'', ``liga-me'') & & \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\paragraph{Its form.} He chose the largest template, so his great-grandson would not be ``a postage stamp''. He asked for one green button where his thumb rests, ``because the Nokia has taught my hand that green means talk'', and a smaller red one in a fixed corner to end calls. Of the three mock-ups, he rejected the bumper because the icons stayed visible (``My finger is disloyal'') and the box as ``a third phone''. He chose the full cover on the smartphone his daughter had already bought: ``This. I see one thing.'' It must look ``dark and plain, like the radio'', not medical; keep the earpiece and speaker open; work flat on the table and at his ear; and show clearly when it is charging.
+
+\paragraph{How it should talk.} The role-play produced rules for the phone's voice:
+\begin{itemize}
+  \item No greeting: ``I pressed the button. I am not at the counter of a shop.''
+  \item The sender's name first, then one sentence, then silence while he looks: ``That is the correct silence.''
+  \item Unknown senders get no photo, no link and no payment; the phone offers to call his daughter instead.
+  \item One voice message at a time, replayed only if he presses again.
+  \item His reply is repeated back for confirmation, in his own words, not ``a poem''.
+  \item A call takes no more steps than his button phone: press, name, yes, ring.
+  \item After two misunderstandings, it does nothing: ``Rude and safe. I prefer that to cheerful and wrong.''
+  \item A light when it has heard him, vibration only for close family, and a calm, short European Portuguese voice that is louder than the kitchen radio.
+\end{itemize}
+
+\paragraph{The storyboard and his condition.} His four panels tell of a morning when his great-grandson's new photo arrives: the phone announces the sender, he presses green and asks to see it, the phone repeats the name, reads the one-line message and shows the photo without moving on, and he replies ``ele \'e lindo''. He added that if the sender is not on his daughter's list, the story does not start. He will keep his button phone until calling his daughter on the new one is as easy as ``the green button''.
+
+\subsection{Lessons about the methods}
+Letting Manuel host a game before any question put him in charge, and a call from his daughter during the game showed his button phone in real use. The phone tour revealed what an interview would not: a dead battery, a PIN on a note, missed taps and one successful large photo. The map and the cards worked because he could refuse: the torch, weather, radio and magnifier cards gave him things to reject, and the blank cards became requirements rather than decoration. We nearly missed that rejecting the radio was about his late wife's station, because we rushed the \emph{don't need} pile. Holding the mock-ups to his ear, flat on the table and in his pocket decided the form. We were wrong that he needed help calling, that he had one phone, that one button would be enough and that photos were a secondary feature.
+
+\section{Next Steps}\label{sec:next}
+Before session~3, in the week of 12~October, we will build a demoable high-fidelity prototype of Manuel's concept. It has three parts. First, a dark, plain 3D-printed cover for his Samsung, with one large window, the earpiece, microphone and speaker uncovered, a green talk button where his thumb rests, a smaller red end button in a fixed corner and a visible charging light. Second, an Android app that replaces the home screen and draws only inside the window: one photo at a time, with no lists or unread counts. It announces each new message from the family group by the sender's name as saved by his daughter, reads one sentence aloud in European Portuguese and waits; replies are limited to short phrases and are repeated back before sending; and senders his daughter did not save never get a photo. Third, the buttons connect to the phone as a small USB keyboard. Because the voice is the riskiest part, a teammate will steer it from a hidden control panel during the test. Session~3 will test four scenarios from session~2: his great-grandson's new photo, one scam message, calling his daughter, and a misunderstood request that ends with the phone doing nothing. Calling must take no more steps than his button phone; otherwise, in his words, the cover ``was a hobby''. We will present the final work in the week of 19~October; Manuel may attend, and if he does, he wants to speak.
+
+\begin{acks}
+We thank Manuel for his time, his coffee and his lessons in bisca, and his daughter for introducing us.
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}
