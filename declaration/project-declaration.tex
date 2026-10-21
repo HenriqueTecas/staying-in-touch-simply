@@ -1,0 +1,62 @@
+% One-page project declaration, in the format of the course example.
+% Build:  tectonic project-declaration.tex   ->  project-declaration.pdf (print, sign, scan for Fenix)
+\documentclass[11pt]{article}
+\usepackage[a4paper, left=25mm, right=22mm, top=18mm, bottom=20mm]{geometry}
+\usepackage[default]{opensans}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{9pt}
+\linespread{1.15}
+
+% Body text sits slightly indented under each heading, as in the example.
+\newenvironment{body}{\par\leftskip=7mm\relax}{\par}
+
+\begin{document}
+
+\begin{minipage}[t]{0.5\textwidth}
+  \vspace{0pt}\includegraphics[width=20mm]{ist-logo.png}
+\end{minipage}%
+\begin{minipage}[t]{0.5\textwidth}
+  \vspace{4mm}\raggedleft Date: \rule{38mm}{0.4pt}\ 2026
+\end{minipage}
+
+\vspace{14mm}
+\begin{center}
+  {\fontsize{24}{29}\selectfont\bfseries Interaction Design Studio}\\[6pt]
+  Co-Design Inclusive Technologies\\
+  Project Declaration
+\end{center}
+
+\vspace{14mm}
+\textbf{Description of the Co-Designer}
+\begin{body}
+Manuel is an 80-year-old widower and retired electrician who lives alone in Lisbon. He plays bisca with a friend at the caf\'e every day and has Sunday lunch at his daughter's. He calls his family every day on a button phone he has used for years.
+
+In July, his daughter bought him a smartphone so he could join the family's WhatsApp group, where the family shares its news and photos of his newborn great-grandson. Manuel does not know how to work the smartphone, so it stays in a drawer, and his daughter reads the group's news to him over the phone. He does not want a simpler phone: he wants what the smartphone holds, without having to learn how to work it.
+\end{body}
+
+\vspace{6mm}
+\textbf{Problem statement}
+\begin{body}
+Manuel needs a way to see the new photos of his great-grandson, to hear his great-granddaughter and the family group, and to reply with a short sentence, without learning the smartphone. The group is where the baby is shown and where news is written. He needs the sender's name first, because a message that says \textquotedblleft ol\'a pai\textquotedblright{} (\textquotedblleft hi dad\textquotedblright) may be a scam.
+\end{body}
+
+\vfill
+\begin{minipage}[t]{0.46\textwidth}
+  Manuel, Co-Designer\\[20mm]
+  \rule{70mm}{0.4pt}\\[-2pt]
+  {\small Manuel}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.46\textwidth}
+  Representatives of the team\\[20mm]
+  \rule{70mm}{0.4pt}\\[-2pt]
+  {\small Henrique Rodrigues}\\[16mm]
+  \rule{70mm}{0.4pt}\\[-2pt]
+  {\small Jo\~ao Rocha}
+\end{minipage}
+\vspace{10mm}
+
+\end{document}
