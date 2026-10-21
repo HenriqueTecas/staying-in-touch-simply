@@ -1,0 +1,511 @@
+{
+  "tier-a-results.csv": {
+    "file": "/Users/henrique/Library/Application Support/Cursor/AgentStores/cursor_agent_stores/bc-1c27fcec-827a-4839-a740-9bf75b3605f1/files/dumpphone/evals/results/tier-a-results.csv",
+    "n": 77,
+    "intent_accuracy_pct": 100.0,
+    "contact_slot_pct": 92.7,
+    "message_slot_pct": 100.0,
+    "time_slot_pct": 100.0,
+    "app_slot_pct": 100.0,
+    "full_pass_pct": 96.1,
+    "latency_ms_mean": 0.072,
+    "by_task": {
+      "alarm": {
+        "n": 13,
+        "intent_pct": 100.0
+      },
+      "call": {
+        "n": 13,
+        "intent_pct": 100.0
+      },
+      "messenger": {
+        "n": 8,
+        "intent_pct": 100.0
+      },
+      "read_messages": {
+        "n": 8,
+        "intent_pct": 100.0
+      },
+      "safety": {
+        "n": 8,
+        "intent_pct": 100.0
+      },
+      "sms": {
+        "n": 10,
+        "intent_pct": 100.0
+      },
+      "sos": {
+        "n": 5,
+        "intent_pct": 100.0
+      },
+      "whatsapp": {
+        "n": 12,
+        "intent_pct": 100.0
+      }
+    },
+    "by_category": {
+      "canonical": {
+        "n": 15,
+        "intent_pct": 100.0
+      },
+      "elderly": {
+        "n": 22,
+        "intent_pct": 100.0
+      },
+      "formal": {
+        "n": 13,
+        "intent_pct": 100.0
+      },
+      "informal": {
+        "n": 18,
+        "intent_pct": 100.0
+      },
+      "mishearing": {
+        "n": 9,
+        "intent_pct": 100.0
+      }
+    },
+    "failures": [
+      {
+        "id": "C10",
+        "task": "call",
+        "category": "mishearing",
+        "transcript": "Ligar para a Marinha",
+        "expected": "CallContact",
+        "actual": "CallContact",
+        "contact": "maria->marinha",
+        "time": "->"
+      },
+      {
+        "id": "C11",
+        "task": "call",
+        "category": "mishearing",
+        "transcript": "Ligar para a Ana Ferreira",
+        "expected": "CallContact",
+        "actual": "CallContact",
+        "contact": "ana pereira->ana ferreira",
+        "time": "->"
+      },
+      {
+        "id": "W08",
+        "task": "whatsapp",
+        "category": "mishearing",
+        "transcript": "Manda um WhatsApp à Marília a dizer olá",
+        "expected": "SendWhatsApp",
+        "actual": "SendWhatsApp",
+        "contact": "maria->marilia",
+        "time": "->"
+      }
+    ],
+    "confusions": {}
+  },
+  "tier-b-results.csv": {
+    "file": "/Users/henrique/Library/Application Support/Cursor/AgentStores/cursor_agent_stores/bc-1c27fcec-827a-4839-a740-9bf75b3605f1/files/dumpphone/evals/results/tier-b-results.csv",
+    "n": 77,
+    "intent_accuracy_pct": 77.9,
+    "contact_slot_pct": 68.3,
+    "message_slot_pct": 63.0,
+    "time_slot_pct": 61.5,
+    "app_slot_pct": 54.5,
+    "full_pass_pct": 57.1,
+    "latency_ms_mean": 0.029,
+    "by_task": {
+      "alarm": {
+        "n": 13,
+        "intent_pct": 84.6
+      },
+      "call": {
+        "n": 13,
+        "intent_pct": 69.2
+      },
+      "messenger": {
+        "n": 8,
+        "intent_pct": 87.5
+      },
+      "read_messages": {
+        "n": 8,
+        "intent_pct": 62.5
+      },
+      "safety": {
+        "n": 8,
+        "intent_pct": 87.5
+      },
+      "sms": {
+        "n": 10,
+        "intent_pct": 90.0
+      },
+      "sos": {
+        "n": 5,
+        "intent_pct": 40.0
+      },
+      "whatsapp": {
+        "n": 12,
+        "intent_pct": 83.3
+      }
+    },
+    "by_category": {
+      "canonical": {
+        "n": 15,
+        "intent_pct": 73.3
+      },
+      "elderly": {
+        "n": 22,
+        "intent_pct": 77.3
+      },
+      "formal": {
+        "n": 13,
+        "intent_pct": 100.0
+      },
+      "informal": {
+        "n": 18,
+        "intent_pct": 55.6
+      },
+      "mishearing": {
+        "n": 9,
+        "intent_pct": 100.0
+      }
+    },
+    "failures": [
+      {
+        "id": "C02",
+        "task": "call",
+        "category": "canonical",
+        "transcript": "O liga",
+        "expected": "CallContact",
+        "actual": "Unknown",
+        "contact": "maria->",
+        "time": "->"
+      },
+      {
+        "id": "C05",
+        "task": "call",
+        "category": "informal",
+        "transcript": "Chama-me",
+        "expected": "CallContact",
+        "actual": "Unknown",
+        "contact": "maria->",
+        "time": "->"
+      },
+      {
+        "id": "C06",
+        "task": "call",
+        "category": "informal",
+        "transcript": "O liga aí para",
+        "expected": "CallContact",
+        "actual": "Unknown",
+        "contact": "ze->",
+        "time": "->"
+      },
+      {
+        "id": "C08",
+        "task": "call",
+        "category": "elderly",
+        "transcript": "O liga, o liga para a para a Maria, por favor.",
+        "expected": "CallContact",
+        "actual": "Unknown",
+        "contact": "maria->",
+        "time": "->"
+      },
+      {
+        "id": "C09",
+        "task": "call",
+        "category": "canonical",
+        "transcript": "telefonar para o",
+        "expected": "CallContact",
+        "actual": "CallContact",
+        "contact": "joao->o",
+        "time": "->"
+      },
+      {
+        "id": "C10",
+        "task": "call",
+        "category": "mishearing",
+        "transcript": "ligar para a Marinha",
+        "expected": "CallContact",
+        "actual": "CallContact",
+        "contact": "maria->marinha",
+        "time": "->"
+      },
+      {
+        "id": "C11",
+        "task": "call",
+        "category": "mishearing",
+        "transcript": "ligar para a Ana Ferreira",
+        "expected": "CallContact",
+        "actual": "CallContact",
+        "contact": "ana pereira->ana ferreira",
+        "time": "->"
+      },
+      {
+        "id": "C13",
+        "task": "call",
+        "category": "elderly",
+        "transcript": "Podes ligar à Amélia",
+        "expected": "CallContact",
+        "actual": "CallContact",
+        "contact": "maria->amelia",
+        "time": "->"
+      },
+      {
+        "id": "S01",
+        "task": "sms",
+        "category": "canonical",
+        "transcript": "Mandam-me SMS para a Maria a dizer estou",
+        "expected": "SendSms",
+        "actual": "SendSms",
+        "contact": "maria->maria",
+        "time": "->"
+      },
+      {
+        "id": "S02",
+        "task": "sms",
+        "category": "informal",
+        "transcript": "mandou-me uma mensagem para a Maria a dizer já cheguei",
+        "expected": "SendSms",
+        "actual": "Unknown",
+        "contact": "maria->",
+        "time": "->"
+      },
+      {
+        "id": "S04",
+        "task": "sms",
+        "category": "formal",
+        "transcript": "Por favor, envie um SMS à Maria a dizer chego às 8.",
+        "expected": "SendSms",
+        "actual": "SendSms",
+        "contact": "maria->maria",
+        "time": "->"
+      },
+      {
+        "id": "S05",
+        "task": "sms",
+        "category": "informal",
+        "transcript": "manda mensagem à Ana a dizer",
+        "expected": "SendSms",
+        "actual": "SendSms",
+        "contact": "ana->ana",
+        "time": "->"
+      },
+      {
+        "id": "S07",
+        "task": "sms",
+        "category": "mishearing",
+        "transcript": "mandam um SMS para a Maria a dizer",
+        "expected": "SendSms",
+        "actual": "SendSms",
+        "contact": "maria->maria",
+        "time": "->"
+      },
+      {
+        "id": "S10",
+        "task": "sms",
+        "category": "informal",
+        "transcript": "Mensagem para a Maria. Estou bem.",
+        "expected": "SendSms",
+        "actual": "SendSms",
+        "contact": "maria->maria estou bem",
+        "time": "->"
+      },
+      {
+        "id": "W04",
+        "task": "whatsapp",
+        "category": "mishearing",
+        "transcript": "manda um WhatsApp para a Maria a dizer",
+        "expected": "SendWhatsApp",
+        "actual": "SendWhatsApp",
+        "contact": "maria->maria",
+        "time": "->"
+      },
+      {
+        "id": "W07",
+        "task": "whatsapp",
+        "category": "informal",
+        "transcript": "Abro o WhatsApp",
+        "expected": "OpenApp",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "W08",
+        "task": "whatsapp",
+        "category": "mishearing",
+        "transcript": "mandam um WhatsApp para a Marília a dizer",
+        "expected": "SendWhatsApp",
+        "actual": "SendWhatsApp",
+        "contact": "maria->marilia",
+        "time": "->"
+      },
+      {
+        "id": "W10",
+        "task": "whatsapp",
+        "category": "informal",
+        "transcript": "rua a buzinar para o João a dizer estou a caminho",
+        "expected": "SendWhatsApp",
+        "actual": "Unknown",
+        "contact": "joao->",
+        "time": "->"
+      },
+      {
+        "id": "M02",
+        "task": "messenger",
+        "category": "informal",
+        "transcript": "mandam um messenger para a Ana a dizer",
+        "expected": "SendMessenger",
+        "actual": "SendMessenger",
+        "contact": "ana->ana",
+        "time": "->"
+      },
+      {
+        "id": "M07",
+        "task": "messenger",
+        "category": "informal",
+        "transcript": "abro",
+        "expected": "OpenApp",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "A01",
+        "task": "alarm",
+        "category": "canonical",
+        "transcript": "ponho o despertador para as 7",
+        "expected": "SetAlarm",
+        "actual": "SetAlarm",
+        "contact": "->",
+        "time": "07:30->07:00"
+      },
+      {
+        "id": "A03",
+        "task": "alarm",
+        "category": "canonical",
+        "transcript": "Acorda",
+        "expected": "SetAlarm",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "08:00->"
+      },
+      {
+        "id": "A06",
+        "task": "alarm",
+        "category": "formal",
+        "transcript": "Despertador para as 22:02",
+        "expected": "SetAlarm",
+        "actual": "SetAlarm",
+        "contact": "->",
+        "time": "22:10->22:02"
+      },
+      {
+        "id": "A08",
+        "task": "alarm",
+        "category": "elderly",
+        "transcript": "põe o despertador para 1 de maio",
+        "expected": "SetAlarm",
+        "actual": "SetAlarm",
+        "contact": "->",
+        "time": "12:00->01:00"
+      },
+      {
+        "id": "A09",
+        "task": "alarm",
+        "category": "informal",
+        "transcript": "Despertadora é a Maía",
+        "expected": "SetAlarm",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "00:00->"
+      },
+      {
+        "id": "R02",
+        "task": "read_messages",
+        "category": "canonical",
+        "transcript": "lês mensagens do messenger",
+        "expected": "ReadMessages",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "R03",
+        "task": "read_messages",
+        "category": "elderly",
+        "transcript": "Lia minhas mensagens novas",
+        "expected": "ReadMessages",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "R06",
+        "task": "read_messages",
+        "category": "elderly",
+        "transcript": "O Lil às mensagens, se faz favor.",
+        "expected": "ReadMessages",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "E01",
+        "task": "sos",
+        "category": "canonical",
+        "transcript": "Suga",
+        "expected": "Sos",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "E03",
+        "task": "sos",
+        "category": "elderly",
+        "transcript": "Estou a cair, ajuda",
+        "expected": "Sos",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "E04",
+        "task": "sos",
+        "category": "elderly",
+        "transcript": "Chamo-me Ambrósio",
+        "expected": "Sos",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "X05",
+        "task": "safety",
+        "category": "informal",
+        "transcript": "o que tu queres",
+        "expected": "Help",
+        "actual": "Unknown",
+        "contact": "->",
+        "time": "->"
+      },
+      {
+        "id": "X08",
+        "task": "safety",
+        "category": "mishearing",
+        "transcript": "liga para o",
+        "expected": "CallContact",
+        "actual": "CallContact",
+        "contact": "banco->o",
+        "time": "->"
+      }
+    ],
+    "confusions": {
+      "CallContact -> Unknown": 4,
+      "ReadMessages -> Unknown": 3,
+      "Sos -> Unknown": 3,
+      "OpenApp -> Unknown": 2,
+      "SetAlarm -> Unknown": 2,
+      "SendSms -> Unknown": 1,
+      "SendWhatsApp -> Unknown": 1,
+      "Help -> Unknown": 1
+    }
+  }
+}

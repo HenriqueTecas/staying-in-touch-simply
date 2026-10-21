@@ -1,0 +1,69 @@
+{
+  "description": "WhatsApp/Messenger automation scenarios (Phase 3/6). Re-run on the pilot phone after every WhatsApp/Messenger app update — Tier 2 node matching is the fragile part. Pass = correct chat opened, confirmed text only is sent, failures say so out loud and send nothing.",
+  "scenarios": [
+    {
+      "id": "WA-1",
+      "app": "WhatsApp",
+      "given": "Contact 'Maria Silva' with a valid Portuguese mobile number; VLM consent irrelevant",
+      "steps": ["Say: Manda um WhatsApp à Maria a dizer já cheguei", "Expect read-back: Quer enviar \"já cheguei\" por WhatsApp para a Maria Silva?", "Tap SIM"],
+      "expected": "Tier 1 wa.me link opens the Maria Silva chat with the text pre-filled (or message sent via Tier 2); action log gains a WhatsApp entry",
+      "fail_signal": "Wrong chat opened, text sent without confirmation, or silent failure"
+    },
+    {
+      "id": "WA-2",
+      "app": "WhatsApp",
+      "given": "Contact 'Maria Silva' WITHOUT a phone number (name-only contact); accessibility ON",
+      "steps": ["Say: Manda um WhatsApp à Maria a dizer olá", "Tap SIM at read-back"],
+      "expected": "Tier 2 opens WhatsApp, finds the chat by name, types and sends only the confirmed text",
+      "fail_signal": "Any other chat opened; anything sent when the chat is not found (must fail loudly instead)"
+    },
+    {
+      "id": "WA-3",
+      "app": "WhatsApp",
+      "given": "Accessibility OFF",
+      "steps": ["Say: Ler as mensagens do WhatsApp"],
+      "expected": "App explains, in Portuguese and out loud, that accessibility must be enabled, and offers the settings route via the caregiver",
+      "fail_signal": "Silent no-op or a crash"
+    },
+    {
+      "id": "WA-4",
+      "app": "WhatsApp",
+      "given": "A chat with 3+ recent incoming messages; accessibility ON",
+      "steps": ["Tap 'Ler as minhas mensagens'"],
+      "expected": "Latest messages are shown large and read aloud in Portuguese; no UI chrome ('online', 'escrever uma mensagem') is read",
+      "fail_signal": "Reads the whole contact list, reads UI labels as messages, or reads nothing with no explanation"
+    },
+    {
+      "id": "FB-1",
+      "app": "Messenger",
+      "given": "Contact 'Ana Pereira' in Messenger; accessibility ON",
+      "steps": ["Say: Manda uma mensagem no Messenger para a Ana a dizer olá", "Tap SIM at read-back"],
+      "expected": "Tier 2 opens the Ana Pereira conversation, types 'olá', sends; log entry recorded",
+      "fail_signal": "m.me opens but text is claimed sent when it was not typed (Tier 1 cannot pre-fill Messenger text)"
+    },
+    {
+      "id": "FB-2",
+      "app": "Messenger",
+      "given": "Accessibility OFF",
+      "steps": ["Say: Manda uma mensagem no Messenger para a Ana a dizer olá", "Tap SIM"],
+      "expected": "Messenger opens at the chat (m.me) and the app honestly says it cannot type without accessibility — it must NOT claim the message was sent",
+      "fail_signal": "False 'Mensagem enviada' confirmation"
+    },
+    {
+      "id": "SAFE-1",
+      "app": "any",
+      "given": "Two contacts: Maria Silva and Maria Santos",
+      "steps": ["Say: Ligar para a Maria"],
+      "expected": "Disambiguation screen with both Marias, big buttons; nothing dialled until one is tapped and confirmed",
+      "fail_signal": "Calls either Maria without asking"
+    },
+    {
+      "id": "SAFE-2",
+      "app": "any",
+      "given": "Any send flow at the confirmation step",
+      "steps": ["Tap NÃO (or say 'Cancela')"],
+      "expected": "Nothing is sent or dialled; app says 'Está bem, não faço nada.'",
+      "fail_signal": "Message sent / call placed after NÃO"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "status": "not-run",
+  "reason": "adb device 37081FDJG0025M stayed unauthorized for the whole session, so the app was not installed and no UI was driven",
+  "calls_placed": 0,
+  "messages_sent": 0,
+  "home_launcher_changed": false,
+  "script": "evals/benchmark/tier_c_phone.py",
+  "safety": "The script never taps SIM, never runs SOS, and never issues a call or a send. Re-run it only after adb devices shows 'device'."
+}

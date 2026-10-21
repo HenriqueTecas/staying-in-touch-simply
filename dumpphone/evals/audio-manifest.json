@@ -1,0 +1,623 @@
+{
+  "method": "macOS say -v Joana (pt-PT) + afconvert 16kHz mono WAV",
+  "voice": "Joana",
+  "cost_usd": 0,
+  "files": [
+    {
+      "id": "C01",
+      "file": "audio/C01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Ligar para a Maria Silva",
+      "cost_usd": 0
+    },
+    {
+      "id": "C02",
+      "file": "audio/C02.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Liga à Maria",
+      "cost_usd": 0
+    },
+    {
+      "id": "C03",
+      "file": "audio/C03.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Por favor, ligue para a Maria Silva",
+      "cost_usd": 0
+    },
+    {
+      "id": "C04",
+      "file": "audio/C04.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Poderia ligar para o João, por favor?",
+      "cost_usd": 0
+    },
+    {
+      "id": "C05",
+      "file": "audio/C05.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Chama a Maria",
+      "cost_usd": 0
+    },
+    {
+      "id": "C06",
+      "file": "audio/C06.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Liga aí para o Zé",
+      "cost_usd": 0
+    },
+    {
+      "id": "C07",
+      "file": "audio/C07.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Quero falar com a minha filha Maria",
+      "cost_usd": 0
+    },
+    {
+      "id": "C08",
+      "file": "audio/C08.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Liga,  liga para a,  para a Maria, por favor",
+      "cost_usd": 0
+    },
+    {
+      "id": "C09",
+      "file": "audio/C09.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Telefonar para o João",
+      "cost_usd": 0
+    },
+    {
+      "id": "C10",
+      "file": "audio/C10.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Ligar para a Marinha",
+      "cost_usd": 0
+    },
+    {
+      "id": "C11",
+      "file": "audio/C11.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Ligar para a Ana Ferreira",
+      "cost_usd": 0
+    },
+    {
+      "id": "C12",
+      "file": "audio/C12.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Faz uma chamada para o José",
+      "cost_usd": 0
+    },
+    {
+      "id": "C13",
+      "file": "audio/C13.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Podes ligar à Maria?",
+      "cost_usd": 0
+    },
+    {
+      "id": "S01",
+      "file": "audio/S01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda um SMS para a Maria a dizer estou bem",
+      "cost_usd": 0
+    },
+    {
+      "id": "S02",
+      "file": "audio/S02.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda uma mensagem para a Maria a dizer já cheguei",
+      "cost_usd": 0
+    },
+    {
+      "id": "S03",
+      "file": "audio/S03.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Envia uma mensagem de texto para o João a dizer obrigado",
+      "cost_usd": 0
+    },
+    {
+      "id": "S04",
+      "file": "audio/S04.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Por favor, envie um SMS à Maria a dizer chego às oito",
+      "cost_usd": 0
+    },
+    {
+      "id": "S05",
+      "file": "audio/S05.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda mensagem à Ana a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "S06",
+      "file": "audio/S06.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Quero mandar uma mensagem à Ana a dizer que estou bem",
+      "cost_usd": 0
+    },
+    {
+      "id": "S07",
+      "file": "audio/S07.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda um esse-eme-esse para a Maria a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "S08",
+      "file": "audio/S08.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Escreve um SMS para o José a dizer já vou",
+      "cost_usd": 0
+    },
+    {
+      "id": "S09",
+      "file": "audio/S09.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Manda,  um SMS,  para a Maria,  a dizer,  estou bem",
+      "cost_usd": 0
+    },
+    {
+      "id": "S10",
+      "file": "audio/S10.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Mensagem para a Maria: estou bem",
+      "cost_usd": 0
+    },
+    {
+      "id": "W01",
+      "file": "audio/W01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda um WhatsApp à Maria a dizer já cheguei",
+      "cost_usd": 0
+    },
+    {
+      "id": "W02",
+      "file": "audio/W02.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Enviar WhatsApp para o José",
+      "cost_usd": 0
+    },
+    {
+      "id": "W03",
+      "file": "audio/W03.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Por favor, manda um WhatsApp à Maria a dizer já cheguei",
+      "cost_usd": 0
+    },
+    {
+      "id": "W04",
+      "file": "audio/W04.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda um uatsap à Maria a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "W05",
+      "file": "audio/W05.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda uma mensagem pelo WhatsApp para a Maria a dizer já cheguei",
+      "cost_usd": 0
+    },
+    {
+      "id": "W06",
+      "file": "audio/W06.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Quero falar com a Maria no WhatsApp",
+      "cost_usd": 0
+    },
+    {
+      "id": "W07",
+      "file": "audio/W07.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Abre o WhatsApp da Maria",
+      "cost_usd": 0
+    },
+    {
+      "id": "W08",
+      "file": "audio/W08.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda um WhatsApp à Marília a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "W09",
+      "file": "audio/W09.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Manda um WhatsApp,  à Maria,  a dizer,  já cheguei, obrigada",
+      "cost_usd": 0
+    },
+    {
+      "id": "W10",
+      "file": "audio/W10.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "WhatsApp para o João a dizer estou a caminho",
+      "cost_usd": 0
+    },
+    {
+      "id": "W11",
+      "file": "audio/W11.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Envie uma mensagem no WhatsApp para a Ana Pereira a dizer boa noite",
+      "cost_usd": 0
+    },
+    {
+      "id": "W12",
+      "file": "audio/W12.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Diz à Maria no WhatsApp que já cheguei",
+      "cost_usd": 0
+    },
+    {
+      "id": "M01",
+      "file": "audio/M01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda uma mensagem no Messenger para a Ana a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "M02",
+      "file": "audio/M02.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda um Messenger para a Ana a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "M03",
+      "file": "audio/M03.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Por favor, envie uma mensagem no Messenger para a Ana Pereira a dizer obrigada",
+      "cost_usd": 0
+    },
+    {
+      "id": "M04",
+      "file": "audio/M04.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda mensagem no Facebook para o João a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "M05",
+      "file": "audio/M05.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Quero mandar uma mensagem à Ana pelo Messenger a dizer estou bem",
+      "cost_usd": 0
+    },
+    {
+      "id": "M06",
+      "file": "audio/M06.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Manda uma mensagem no Messenjer para a Ana a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "M07",
+      "file": "audio/M07.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Abre o Messenger",
+      "cost_usd": 0
+    },
+    {
+      "id": "M08",
+      "file": "audio/M08.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Manda,  uma mensagem no Messenger,  para a Ana,  a dizer olá",
+      "cost_usd": 0
+    },
+    {
+      "id": "A01",
+      "file": "audio/A01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Põe o despertador para as sete e meia",
+      "cost_usd": 0
+    },
+    {
+      "id": "A02",
+      "file": "audio/A02.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Despertador às 8:15",
+      "cost_usd": 0
+    },
+    {
+      "id": "A03",
+      "file": "audio/A03.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Acorda-me às oito",
+      "cost_usd": 0
+    },
+    {
+      "id": "A04",
+      "file": "audio/A04.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Por favor, põe o despertador para as sete e meia",
+      "cost_usd": 0
+    },
+    {
+      "id": "A05",
+      "file": "audio/A05.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Põe um alarme para amanhã às seis da manhã",
+      "cost_usd": 0
+    },
+    {
+      "id": "A06",
+      "file": "audio/A06.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Despertador para as vinte e duas e dez",
+      "cost_usd": 0
+    },
+    {
+      "id": "A07",
+      "file": "audio/A07.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Acorda-me às sete menos um quarto",
+      "cost_usd": 0
+    },
+    {
+      "id": "A08",
+      "file": "audio/A08.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Põe o despertador para o meio-dia",
+      "cost_usd": 0
+    },
+    {
+      "id": "A09",
+      "file": "audio/A09.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Despertador à meia-noite",
+      "cost_usd": 0
+    },
+    {
+      "id": "A10",
+      "file": "audio/A10.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Põe o despertador para as sete e meia da manhã",
+      "cost_usd": 0
+    },
+    {
+      "id": "A11",
+      "file": "audio/A11.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Põe,  o despertador,  para as,  oito e um quarto",
+      "cost_usd": 0
+    },
+    {
+      "id": "A12",
+      "file": "audio/A12.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Lembra-me às nove para tomar o remédio",
+      "cost_usd": 0
+    },
+    {
+      "id": "A13",
+      "file": "audio/A13.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Despertador às seis e quarenta e cinco",
+      "cost_usd": 0
+    },
+    {
+      "id": "R01",
+      "file": "audio/R01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Ler as mensagens do WhatsApp",
+      "cost_usd": 0
+    },
+    {
+      "id": "R02",
+      "file": "audio/R02.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Lê as mensagens do Messenger",
+      "cost_usd": 0
+    },
+    {
+      "id": "R03",
+      "file": "audio/R03.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Lê-me as mensagens novas",
+      "cost_usd": 0
+    },
+    {
+      "id": "R04",
+      "file": "audio/R04.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Por favor, lê as minhas mensagens do WhatsApp",
+      "cost_usd": 0
+    },
+    {
+      "id": "R05",
+      "file": "audio/R05.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "O que é que a Maria me mandou no WhatsApp?",
+      "cost_usd": 0
+    },
+    {
+      "id": "R06",
+      "file": "audio/R06.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Lê lá as mensagens, se faz favor",
+      "cost_usd": 0
+    },
+    {
+      "id": "R07",
+      "file": "audio/R07.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Ler as mensagens do Uatsap",
+      "cost_usd": 0
+    },
+    {
+      "id": "R08",
+      "file": "audio/R08.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Ouvir as mensagens do Messenger",
+      "cost_usd": 0
+    },
+    {
+      "id": "E01",
+      "file": "audio/E01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Socorro!",
+      "cost_usd": 0
+    },
+    {
+      "id": "E02",
+      "file": "audio/E02.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Preciso de ajuda",
+      "cost_usd": 0
+    },
+    {
+      "id": "E03",
+      "file": "audio/E03.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Estou a cair, ajuda-me",
+      "cost_usd": 0
+    },
+    {
+      "id": "E04",
+      "file": "audio/E04.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Chama uma ambulância",
+      "cost_usd": 0
+    },
+    {
+      "id": "E05",
+      "file": "audio/E05.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Emergência",
+      "cost_usd": 0
+    },
+    {
+      "id": "X01",
+      "file": "audio/X01.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Cancela",
+      "cost_usd": 0
+    },
+    {
+      "id": "X02",
+      "file": "audio/X02.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Não, cancela isso",
+      "cost_usd": 0
+    },
+    {
+      "id": "X03",
+      "file": "audio/X03.wav",
+      "voice": "Joana",
+      "rate_wpm": 120,
+      "text_rendered": "Esquece, não faças nada",
+      "cost_usd": 0
+    },
+    {
+      "id": "X04",
+      "file": "audio/X04.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Para, não ligues",
+      "cost_usd": 0
+    },
+    {
+      "id": "X05",
+      "file": "audio/X05.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "O que podes fazer?",
+      "cost_usd": 0
+    },
+    {
+      "id": "X06",
+      "file": "audio/X06.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Qual é o tempo amanhã?",
+      "cost_usd": 0
+    },
+    {
+      "id": "X07",
+      "file": "audio/X07.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Toca música para mim",
+      "cost_usd": 0
+    },
+    {
+      "id": "X08",
+      "file": "audio/X08.wav",
+      "voice": "Joana",
+      "rate_wpm": 155,
+      "text_rendered": "Liga para o banco",
+      "cost_usd": 0
+    }
+  ]
+}

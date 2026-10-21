@@ -1,0 +1,21 @@
+{
+  "description": "Portuguese voice-intent eval cases for the rule-based parser (Phase 2/6). Each case is mirrored by RuleBasedIntentParserTest; add the spoken transcript exactly as mis-heard on the pilot phone when STT differs.",
+  "locale_default": "pt-PT",
+  "cases": [
+    {"transcript": "Ligar para a Maria Silva", "expected": "CallContact", "contactQuery": "maria silva"},
+    {"transcript": "Liga à Maria", "expected": "CallContact", "contactQuery": "maria"},
+    {"transcript": "Telefonar para o João", "expected": "CallContact", "contactQuery": "joao", "variant": "pt-BR-ok"},
+    {"transcript": "Manda um WhatsApp à Maria a dizer já cheguei", "expected": "SendWhatsApp", "contactQuery": "maria", "messageContains": "cheguei"},
+    {"transcript": "Enviar WhatsApp para o José", "expected": "SendWhatsApp", "contactQuery": "jose", "messageContains": ""},
+    {"transcript": "Manda uma mensagem no Messenger para a Ana a dizer olá", "expected": "SendMessenger", "contactQuery": "ana"},
+    {"transcript": "Manda um SMS para a Maria a dizer estou bem", "expected": "SendSms", "contactQuery": "maria"},
+    {"transcript": "Põe o despertador para as sete e meia", "expected": "SetAlarm", "hour": 7, "minute": 30},
+    {"transcript": "Despertador às 8:15", "expected": "SetAlarm", "hour": 8, "minute": 15},
+    {"transcript": "Acorda-me às oito", "expected": "SetAlarm", "hour": 8, "minute": 0},
+    {"transcript": "Ler as mensagens do WhatsApp", "expected": "ReadMessages", "app": "WHATSAPP"},
+    {"transcript": "Lê as mensagens do Messenger", "expected": "ReadMessages", "app": "MESSENGER"},
+    {"transcript": "Socorro!", "expected": "Sos"},
+    {"transcript": "Cancela", "expected": "Cancel"},
+    {"transcript": "Qual é o tempo amanhã?", "expected": "Unknown", "note": "Must ask again; never guess or browse."}
+  ]
+}

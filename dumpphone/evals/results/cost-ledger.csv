@@ -1,0 +1,9 @@
+ts,tier,provider,model,cases,est_cost_usd,actual_cost_usd,note
+2026-10-21T20:53:11,B-cloud,openrouter,nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free,3,0.0000,0.0000,free model
+2026-10-21T21:04:37,B-cloud-STT,openrouter,google/gemini-2.5-flash-lite,77,0.0077,0.00155,actual from usage.cost per response; then run gradle BenchmarkTierBTest
+2026-10-21T21:06:14,B-cloud-STT-retry,openrouter,google/gemini-2.5-flash-lite,17,0.0017,0.00053,"retry of empty transcripts after rate-limit, spaced 1.2s"
+2026-10-21T21:07:28,B-cloud-STT-retry-2,openrouter,google/gemini-2.5-flash-lite,8,0.0008,0.00024,second retry after 429 cooldown
+2026-10-21T21:08:01,B-cloud-STT-retry-3,openrouter,google/gemini-2.5-flash-lite,1,0.0001,0.00004,final retry of R04
+2026-10-21T20:52:00,probe,openrouter,mistralai/voxtral-small-24b-2507,1,0.0002,0.0001045,"one clip, not used for the scored run"
+2026-10-21T20:52:05,probe,openrouter,google/gemini-2.5-flash-lite,1,0.0001,0.0000217,one clip before the full run
+2026-10-21T20:51:30,probe,openrouter,thinkingmachines/inkling:free,1,0,0,"403, gated to agentic harnesses, no charge"

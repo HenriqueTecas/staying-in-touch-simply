@@ -1,0 +1,15 @@
+{
+  "comment": "Optional paid path. No API key belongs in this file. The key is read at runtime from OPENROUTER_API_KEY or OPENROUTER_KEY_FILE. Local/on-device stays the default. A run refuses to start if its pre-flight estimate exceeds hard_cap_usd.",
+  "provider": "openrouter",
+  "base_url": "https://openrouter.ai/api/v1",
+  "hard_cap_usd": 0.5,
+  "stt_default": "google/gemini-2.5-flash-lite",
+  "stt_cheap": "mistralai/voxtral-small-24b-2507",
+  "speech_to_action_free": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+  "speech_to_action_free_alt": "thinkingmachines/inkling-small:free",
+  "intent_llm_free": "liquid/lfm-2.5-2.6b:free",
+  "intent_llm_cheap": "google/gemini-2.5-flash-lite",
+  "vlm_free": "google/gemma-4-31b-it:free",
+  "vlm_cheap": "google/gemini-2.5-flash-lite",
+  "tts_paid": null
+}
