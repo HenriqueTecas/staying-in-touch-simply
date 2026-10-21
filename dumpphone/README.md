@@ -24,12 +24,11 @@ key is configured.
 > AccessibilityService use for chat automation, so the pilot is installed
 > directly (side-loaded). Only install on a phone you own.
 
-You need the debug APK: `app-debug.apk` (shipped alongside this project in
-the deliverable folder, or built with `./gradlew assembleDebug` →
-`app/build/outputs/apk/debug/app-debug.apk`).
+The file to install is `Dumpphone.apk` in this folder. A local build writes
+`app/build/outputs/apk/debug/app-debug.apk`; that is the same app.
 
-1. **Copy the APK to the phone** (USB cable, email it to yourself, or
-   `adb install -r app-debug.apk` from a computer).
+1. **Copy `Dumpphone.apk` to the phone** (USB cable, email it, or
+   `adb install -r Dumpphone.apk` from a computer).
 2. On the phone, tap the APK in Files/Downloads. If asked, allow
    **"Install unknown apps"** for the Files app, then tap **Install**.
 3. Open **Dumpphone**. Allow the permissions it asks for:
