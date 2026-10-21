@@ -33,8 +33,11 @@ class RuleBasedIntentParserTest {
         assertEquals("", (r as ParsedIntent.SendWhatsApp).message)
     }
     @Test fun `messenger com mensagem`() {
-        val r = parser.parse("Manda uma mensagem no Messenger para a Ana a dizer olá")
-        assertTrue(r is ParsedIntent.SendMessenger)
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("Manda uma mensagem no Messenger para a Ana a dizer olá"))
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("Abre o Messenger"))
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("Manda mensagem no Facebook para o João a dizer olá"))
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("Manda uma mensagem no Messenjer para a Ana a dizer olá"))
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("Quero falar com a Ana no Messenger"))
     }
     @Test fun `sms explicito`() {
         val r = parser.parse("Manda um SMS para a Maria a dizer estou bem")
@@ -54,7 +57,8 @@ class RuleBasedIntentParserTest {
         assertEquals(ParsedIntent.ReadMessages(ChatApp.WHATSAPP), parser.parse("Ler as mensagens do WhatsApp"))
     }
     @Test fun `ler mensagens messenger`() {
-        assertEquals(ParsedIntent.ReadMessages(ChatApp.MESSENGER), parser.parse("Lê as mensagens do Messenger"))
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("Lê as mensagens do Messenger"))
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("Ouvir as mensagens do Messenger"))
     }
     @Test fun `socorro`() { assertEquals(ParsedIntent.Sos, parser.parse("Socorro!")) }
     @Test fun `cancelar`() { assertEquals(ParsedIntent.Cancel, parser.parse("Cancela")) }
@@ -106,8 +110,7 @@ class RuleBasedIntentParserTest {
         assertTrue(r.message.contains("estou bem", ignoreCase = true))
     }
     @Test fun `mandou uma mensagem nao e ler`() {
-        val r = parser.parse("mandou uma mensagem no messenger para a Ana a dizer olá")
-        assertTrue(r is ParsedIntent.SendMessenger)
+        assertEquals(ParsedIntent.MessengerRemoved, parser.parse("mandou uma mensagem no messenger para a Ana a dizer olá"))
     }
     @Test fun `o que me mandou e ler`() {
         assertEquals(ParsedIntent.ReadMessages(ChatApp.WHATSAPP), parser.parse("O que é que a Maria me mandou no WhatsApp?"))

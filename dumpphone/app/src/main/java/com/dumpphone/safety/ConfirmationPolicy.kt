@@ -1,5 +1,6 @@
 package com.dumpphone.safety
 
+import com.dumpphone.data.DummyMode
 import com.dumpphone.voice.ParsedIntent
 
 /**
@@ -13,9 +14,10 @@ import com.dumpphone.voice.ParsedIntent
 object ConfirmationPolicy {
 
     fun requiresConfirmation(intent: ParsedIntent, contactWasAmbiguous: Boolean): Boolean = when (intent) {
-        is ParsedIntent.SendWhatsApp, is ParsedIntent.SendMessenger, is ParsedIntent.SendSms -> true
+        is ParsedIntent.SendWhatsApp, is ParsedIntent.SendSms -> true
         is ParsedIntent.CallContact -> true // read-back is cheap; a wrong call is not
         is ParsedIntent.Sos -> false // SOS is one-tap by design; delay defeats it
+        is ParsedIntent.MessengerRemoved -> false
         else -> contactWasAmbiguous
     }
 
@@ -24,8 +26,8 @@ object ConfirmationPolicy {
         val who = contactName ?: "esse contacto"
         return when (intent) {
             is ParsedIntent.SendWhatsApp -> "Quer enviar \"${intent.message}\" por WhatsApp para a $who?"
-            is ParsedIntent.SendMessenger -> "Quer enviar \"${intent.message}\" por Messenger para a $who?"
             is ParsedIntent.SendSms -> "Quer enviar a mensagem \"${intent.message}\" para a $who?"
+            is ParsedIntent.MessengerRemoved -> DummyMode.MESSENGER_REMOVED
             is ParsedIntent.CallContact -> "Quer ligar para a $who?"
             is ParsedIntent.SetAlarm -> "Quer pôr o despertador para as ${"%02d:%02d".format(intent.hour, intent.minute)}?"
             is ParsedIntent.Sos -> "Quer pedir ajuda de emergência agora?"

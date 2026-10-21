@@ -7,7 +7,6 @@
 
     <queries>
         <package android:name="com.whatsapp" />
-        <package android:name="com.facebook.orca" />
         <package android:name="com.google.android.googlequicksearchbox" />
         <package android:name="com.google.android.as" />
         <package android:name="com.google.android.tts" />

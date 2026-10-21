@@ -8,7 +8,7 @@ on one standard phone model (per plan).
 ## What is already in the code
 
 - `launcher/KioskManager.kt` — checks `DevicePolicyManager.isDeviceOwnerApp`,
-  calls `setLockTaskPackages` for Dumpphone + WhatsApp + Messenger + dialler,
+  calls `setLockTaskPackages` for Dumpphone + WhatsApp + dialler,
   and `startLockTask()` / `stopLockTask()`. All no-ops when not Device Owner.
 - `launcher/DumpphoneAdminReceiver.kt` + `res/xml/device_admin.xml` —
   provisioning target declared in the manifest.
@@ -36,7 +36,7 @@ adb shell dpm set-device-owner com.dumpphone/.launcher.DumpphoneAdminReceiver
 
 Then: open Dumpphone → gear → caregiver PIN → enable kiosk use, set it as
 the default HOME app, and reboot. The user should now be unable to leave
-Dumpphone with Back/Home; WhatsApp/Messenger/dialler remain reachable only
+Dumpphone with Back/Home; WhatsApp and the dialler remain reachable only
 through Dumpphone's own flows (LockTask whitelist above).
 
 ## Undoing it (returning the phone to normal)
@@ -60,6 +60,6 @@ in `docs/BASELINE.md`.
 ## Side-load distribution note
 
 There are **no Play Store promises** for this project. AccessibilityService
-use for WhatsApp/Messenger automation is restricted by Google Play policy;
+use for WhatsApp automation is restricted by Google Play policy;
 the pilot is distributed as a direct (side-loaded) APK install — see the
 root `README.md`.

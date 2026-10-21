@@ -19,8 +19,6 @@ data class Contact(
     val photoUri: String? = null,
     val nicknames: List<String> = emptyList(),
     val isFavourite: Boolean = false,
-    /** Username/handle for Messenger (m.me/<username>), when known. */
-    val messengerUsername: String? = null,
     /** Shown on the mock screens. Never passed to the dialler. */
     val displayPhone: String? = null,
     /** Short relationship label, e.g. "Filha". */

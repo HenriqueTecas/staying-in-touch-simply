@@ -20,7 +20,7 @@ object UiTreeReader {
         root.flatten()
             .map { it.text.trim() }
             .filter { it.length >= 2 }
-            // Filter out obvious UI chrome in PT/EN WhatsApp & Messenger.
+            // Filter out obvious UI chrome in PT/EN WhatsApp.
             .filterNot { it.lowercase() in CHROME_WORDS }
             .takeLast(max)
             .asReversed()

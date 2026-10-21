@@ -26,13 +26,13 @@ class BenchmarkTierATest {
         is ParsedIntent.CallContact -> "CallContact"
         is ParsedIntent.SendSms -> "SendSms"
         is ParsedIntent.SendWhatsApp -> "SendWhatsApp"
-        is ParsedIntent.SendMessenger -> "SendMessenger"
         is ParsedIntent.SetAlarm -> "SetAlarm"
         is ParsedIntent.ReadMessages -> "ReadMessages"
         is ParsedIntent.OpenApp -> "OpenApp"
         is ParsedIntent.Sos -> "Sos"
         is ParsedIntent.Cancel -> "Cancel"
         is ParsedIntent.Help -> "Help"
+        is ParsedIntent.MessengerRemoved -> "MessengerRemoved"
         is ParsedIntent.Unknown -> "Unknown"
     }
 
@@ -84,13 +84,11 @@ class BenchmarkTierATest {
                 is ParsedIntent.CallContact -> r.contactQuery
                 is ParsedIntent.SendSms -> r.contactQuery
                 is ParsedIntent.SendWhatsApp -> r.contactQuery
-                is ParsedIntent.SendMessenger -> r.contactQuery
                 else -> null
             }
             val actMsg = when (r) {
                 is ParsedIntent.SendSms -> r.message
                 is ParsedIntent.SendWhatsApp -> r.message
-                is ParsedIntent.SendMessenger -> r.message
                 else -> null
             }
             val actTime = if (r is ParsedIntent.SetAlarm) "%02d:%02d".format(r.hour, r.minute) else null

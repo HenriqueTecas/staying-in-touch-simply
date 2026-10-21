@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">Dumpphone</string>
     <string name="a11y_service_label">Dumpphone — ajuda a ler e escrever mensagens</string>
-    <string name="a11y_service_description">Permite ao Dumpphone abrir conversas do WhatsApp e do Messenger, escrever mensagens que o utilizador confirmou e ler mensagens em voz alta. Nenhuma mensagem é enviada sem confirmação falada.</string>
+    <string name="a11y_service_description">Permite ao Dumpphone abrir conversas do WhatsApp, escrever mensagens que o utilizador confirmou e ler mensagens em voz alta. Nenhuma mensagem é enviada sem confirmação falada.</string>
 </resources>

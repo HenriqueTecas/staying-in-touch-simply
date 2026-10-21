@@ -13,8 +13,6 @@
 | Android version / API level | A PREENCHER (app requires Android 8.0 / API 26+) | Settings → About phone → Android version |
 | WhatsApp version | A PREENCHER | WhatsApp → Settings → Help → App info |
 | WhatsApp package present | A PREENCHER (expected `com.whatsapp`) | Check it opens from the WhatsApp tile |
-| Messenger version | A PREENCHER | Messenger → profile → (scroll) version |
-| Messenger package present | A PREENCHER (expected `com.facebook.orca`) | Check it opens from the Messenger tile |
 | Portuguese variant | **pt-PT (default)** — change in Dumpphone caregiver settings if the user speaks pt-BR | Affects SpeechRecognizer locale, TTS voice, and `wa.me` country-code defaults (+351 vs +55) |
 | TTS Portuguese voice installed | A PREENCHER (yes/no) | Settings → Accessibility / General management → Text-to-speech; download a Portuguese voice if missing |
 | On-device speech recognition available | A PREENCHER (yes/no) | Tap FALAR with Wi-Fi/mobile data off; if it fails, enable "On-device recognition" / download the Portuguese language pack in the Google app / Gboard settings |
@@ -25,7 +23,7 @@
 
 1. Install Dumpphone (see `README.md` at the project root, "Install on a phone").
 2. Open Settings → About phone; copy model + Android version into the table.
-3. Open WhatsApp and Messenger once, note their versions.
+3. Open WhatsApp once and note its version. Messenger is not part of this phone.
 4. In Dumpphone: gear icon (top right) → PIN `1234` → confirm the Portuguese
    variant (pt-PT default; switch to pt-BR only if the user is Brazilian),
    set the SOS contact name + number, and change the caregiver PIN.
@@ -44,7 +42,7 @@ from the home screen (one confirmation counts as the second step), with
 | 2 | Send an SMS — "Manda um SMS para a Maria a dizer já cheguei" | 1 (sms:) | ☐ |
 | 3 | Set an alarm — "Põe o despertador para as sete e meia" | 1 (AlarmClock) | ☐ |
 | 4 | Send a WhatsApp message — "Manda um WhatsApp à Maria a dizer já cheguei" | 1 (wa.me) or 2 | ☐ |
-| 5 | Send a Messenger message — "Manda uma mensagem no Messenger para a Ana a dizer olá" | 2 (accessibility) | ☐ |
+| 5 | Messenger is unavailable — "Manda uma mensagem no Messenger para a Ana a dizer olá" stays in Dumpphone, opens nothing, sends nothing | spoken refusal | ☐ |
 | 6 | Read new messages aloud — "Ler as mensagens do WhatsApp" | 2 (accessibility + TTS) | ☐ |
 | 7 | SOS — tap the red **SOS — Ajuda** tile (or say "Socorro") | 1 (call SOS number / 112) | ☐ |
 | 8 | Ambiguous name — "Ligar para a Maria" with two Marias in contacts → must ask which one, never guess | Safety | ☐ |

@@ -23,6 +23,11 @@ class IntentRouterTest {
         val d = IntentRouter(false, false).route(ParsedIntent.ReadMessages(ChatApp.WHATSAPP))
         assertEquals(Tier.TIER2_ACCESSIBILITY, d.tier)
     }
+    @Test fun `messenger nao abre aplicacao`() {
+        val d = IntentRouter(false, true).route(ParsedIntent.MessengerRemoved)
+        assertEquals(Tier.TIER1_INTENT, d.tier)
+        assertFalse(d.needsAccessibility)
+    }
     @Test fun `desconhecido sem consentimento nao vai para vlm`() {
         val d = IntentRouter(vlmConsentGranted = false, accessibilityEnabled = false).route(ParsedIntent.Unknown("tempo?"))
         assertEquals(Tier.TIER1_INTENT, d.tier)

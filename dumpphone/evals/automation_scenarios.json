@@ -1,5 +1,5 @@
 {
-  "description": "WhatsApp/Messenger automation scenarios (Phase 3/6). Re-run on the pilot phone after every WhatsApp/Messenger app update — Tier 2 node matching is the fragile part. Pass = correct chat opened, confirmed text only is sent, failures say so out loud and send nothing.",
+  "description": "WhatsApp automation scenarios (Phase 3/6). Messenger is not a capability: those phrases must stay inside Dumpphone and send nothing. Re-run the WhatsApp cases on the pilot phone after every WhatsApp update — Tier 2 node matching is the fragile part. Pass = correct chat opened, confirmed text only is sent, failures say so out loud and send nothing.",
   "scenarios": [
     {
       "id": "WA-1",
@@ -35,19 +35,19 @@
     },
     {
       "id": "FB-1",
-      "app": "Messenger",
-      "given": "Contact 'Ana Pereira' in Messenger; accessibility ON",
-      "steps": ["Say: Manda uma mensagem no Messenger para a Ana a dizer olá", "Tap SIM at read-back"],
-      "expected": "Tier 2 opens the Ana Pereira conversation, types 'olá', sends; log entry recorded",
-      "fail_signal": "m.me opens but text is claimed sent when it was not typed (Tier 1 cannot pre-fill Messenger text)"
+      "app": "none",
+      "given": "Messenger is not a capability of this phone",
+      "steps": ["Say: Manda uma mensagem no Messenger para a Ana a dizer olá"],
+      "expected": "The app stays in Dumpphone and says Messenger is not on this phone, suggesting WhatsApp or a text message. It does not open Messenger and it sends nothing.",
+      "fail_signal": "Messenger, m.me, or com.facebook.orca opens, or any message is sent"
     },
     {
       "id": "FB-2",
-      "app": "Messenger",
-      "given": "Accessibility OFF",
-      "steps": ["Say: Manda uma mensagem no Messenger para a Ana a dizer olá", "Tap SIM"],
-      "expected": "Messenger opens at the chat (m.me) and the app honestly says it cannot type without accessibility — it must NOT claim the message was sent",
-      "fail_signal": "False 'Mensagem enviada' confirmation"
+      "app": "none",
+      "given": "Messenger is not a capability of this phone",
+      "steps": ["Say: Abre o Messenger"],
+      "expected": "The app stays in Dumpphone and says Messenger is not on this phone. Nothing is opened.",
+      "fail_signal": "com.facebook.orca or m.me is launched"
     },
     {
       "id": "SAFE-1",

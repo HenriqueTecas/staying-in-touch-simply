@@ -68,7 +68,6 @@ private val Paper = Color(0xFFFFFFFF)
 private val Green = Color(0xFF0B6E2F)
 private val Blue = Color(0xFF0B4DA2)
 private val Orange = Color(0xFFB34700)
-private val Purple = Color(0xFF5B2CB4)
 private val Teal = Color(0xFF00695C)
 private val Red = Color(0xFFB00020)
 
@@ -117,7 +116,7 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() { speaker.shutdown(); stt.stop(); super.onDestroy() }
 }
 
-internal enum class PickerMode { CALL, SMS, WHATSAPP, MESSENGER }
+internal enum class PickerMode { CALL, SMS, WHATSAPP }
 private sealed interface Screen {
     data object Home : Screen
     data class Picker(val mode: PickerMode) : Screen
@@ -185,7 +184,6 @@ private fun DumpphoneApp(activity: MainActivity) {
 
     fun appLabel(app: ChatApp): String = when (app) {
         ChatApp.WHATSAPP -> "WhatsApp"
-        ChatApp.MESSENGER -> "Messenger"
         ChatApp.SMS -> "Mensagens"
     }
 
@@ -280,6 +278,14 @@ private fun DumpphoneApp(activity: MainActivity) {
     }
 
     fun executeConfirmed(intent: ParsedIntent, contact: Contact?) {
+        if (intent is ParsedIntent.MessengerRemoved) {
+            val msg = DummyMode.MESSENGER_REMOVED
+            screen = Screen.Notice(msg)
+            activity.speak(msg)
+            settings.log(msg)
+            android.util.Log.i("DUMPPHONE", "messenger-removed opened=false sent=false")
+            return
+        }
         if (DummyMode.ENABLED && intent !is ParsedIntent.SetAlarm) {
             when (intent) {
                 is ParsedIntent.CallContact -> {
@@ -293,7 +299,6 @@ private fun DumpphoneApp(activity: MainActivity) {
                 }
                 is ParsedIntent.SendSms -> mockSent(contact, "MENSAGEM", intent.message)
                 is ParsedIntent.SendWhatsApp -> mockSent(contact, "WHATSAPP", intent.message)
-                is ParsedIntent.SendMessenger -> mockSent(contact, "MESSENGER", intent.message)
                 else -> {
                     screen = Screen.Notice(DummyMode.HELD_MESSAGE)
                     activity.speak(DummyMode.HELD_MESSAGE)
@@ -330,19 +335,6 @@ private fun DumpphoneApp(activity: MainActivity) {
                     }
                 }
             }
-            is ParsedIntent.SendMessenger -> {
-                activity.lifecycleScope.launch {
-                    val result = withContext(Dispatchers.Default) {
-                        if (contact != null) chatAutomation.sendMessengerTier2(contact, intent.message)
-                        else ChatAutomation.Result.Failed("Contacto não encontrado.")
-                    }
-                    when (result) {
-                        ChatAutomation.Result.Done -> logAndTell("Mensagem enviada no Messenger para ${contact?.displayName}.")
-                        is ChatAutomation.Result.NeedsAccessibility -> { screen = Screen.Notice(result.reasonPt); activity.speak(result.reasonPt) }
-                        is ChatAutomation.Result.Failed -> { screen = Screen.Notice(result.reasonPt); activity.speak(result.reasonPt) }
-                    }
-                }
-            }
             is ParsedIntent.SetAlarm -> {
                 tier1.setAlarm(intent.hour, intent.minute, intent.label)
                 logAndTell("Despertador para as ${"%02d:%02d".format(intent.hour, intent.minute)}. Confirme no ecrã do relógio.")
@@ -364,6 +356,13 @@ private fun DumpphoneApp(activity: MainActivity) {
                 screen = Screen.Notice(help)
                 activity.speak(help)
             }
+            is ParsedIntent.MessengerRemoved -> {
+                val msg = DummyMode.MESSENGER_REMOVED
+                android.util.Log.i("DUMPPHONE", "messenger-removed opened=false sent=false")
+                screen = Screen.Notice(msg)
+                activity.speak(msg)
+                settings.log(msg)
+            }
             is ParsedIntent.Sos -> doSos()
             is ParsedIntent.SetAlarm -> {
                 router.route(intent)
@@ -374,7 +373,6 @@ private fun DumpphoneApp(activity: MainActivity) {
                 if (DummyMode.ENABLED) {
                     when (intent.app) {
                         ChatApp.WHATSAPP -> screen = Screen.Chats(ChatApp.WHATSAPP)
-                        ChatApp.MESSENGER -> screen = Screen.Picker(PickerMode.MESSENGER)
                         ChatApp.SMS -> screen = Screen.Picker(PickerMode.SMS)
                     }
                     activity.speak("A abrir ${intent.app.displayNamePt}. Isto é um exemplo.")
@@ -411,12 +409,11 @@ private fun DumpphoneApp(activity: MainActivity) {
                     }
                 }
             }
-            is ParsedIntent.CallContact, is ParsedIntent.SendSms, is ParsedIntent.SendWhatsApp, is ParsedIntent.SendMessenger -> {
+            is ParsedIntent.CallContact, is ParsedIntent.SendSms, is ParsedIntent.SendWhatsApp -> {
                 val query = when (intent) {
                     is ParsedIntent.CallContact -> intent.contactQuery
                     is ParsedIntent.SendSms -> intent.contactQuery
                     is ParsedIntent.SendWhatsApp -> intent.contactQuery
-                    is ParsedIntent.SendMessenger -> intent.contactQuery
                     else -> ""
                 }
                 when (val match = ContactMatcher.match(query, contacts)) {
@@ -433,13 +430,11 @@ private fun DumpphoneApp(activity: MainActivity) {
                         val messageBlank = when (intent) {
                             is ParsedIntent.SendSms -> intent.message.isBlank()
                             is ParsedIntent.SendWhatsApp -> intent.message.isBlank()
-                            is ParsedIntent.SendMessenger -> intent.message.isBlank()
                             else -> false
                         }
                         if (messageBlank) {
                             val app = when (intent) {
                                 is ParsedIntent.SendWhatsApp -> ChatApp.WHATSAPP
-                                is ParsedIntent.SendMessenger -> ChatApp.MESSENGER
                                 else -> ChatApp.SMS
                             }
                             screen = Screen.Dictate(match.contact, app)
@@ -538,7 +533,6 @@ private fun DumpphoneApp(activity: MainActivity) {
             is Screen.Dictate -> startListening(stayOnScreen = true) { text ->
                 val intent = when (s.app) {
                     ChatApp.WHATSAPP -> ParsedIntent.SendWhatsApp(s.contact.displayName, text)
-                    ChatApp.MESSENGER -> ParsedIntent.SendMessenger(s.contact.displayName, text)
                     ChatApp.SMS -> ParsedIntent.SendSms(s.contact.displayName, text)
                 }
                 screen = Screen.Confirm(intent, s.contact, heard = text)
@@ -597,7 +591,6 @@ private fun DumpphoneApp(activity: MainActivity) {
                             PickerMode.CALL -> "Ligar para quem?"
                             PickerMode.SMS -> "Mensagem para quem?"
                             PickerMode.WHATSAPP -> "WhatsApp para quem?"
-                            PickerMode.MESSENGER -> "Messenger para quem?"
                         },
                         subtitle = if (s.mode == PickerMode.CALL) {
                             "Toque na pessoa. Eu confirmo antes de ligar."
@@ -615,7 +608,6 @@ private fun DumpphoneApp(activity: MainActivity) {
                                 else -> {
                                     val app = when (s.mode) {
                                         PickerMode.WHATSAPP -> ChatApp.WHATSAPP
-                                        PickerMode.MESSENGER -> ChatApp.MESSENGER
                                         else -> ChatApp.SMS
                                     }
                                     screen = Screen.Dictate(contact, app)
@@ -662,13 +654,11 @@ private fun DumpphoneApp(activity: MainActivity) {
                             val messageBlank = when (val i = s.intent) {
                                 is ParsedIntent.SendSms -> i.message.isBlank()
                                 is ParsedIntent.SendWhatsApp -> i.message.isBlank()
-                                is ParsedIntent.SendMessenger -> i.message.isBlank()
                                 else -> false
                             }
                             if (messageBlank && s.intent !is ParsedIntent.CallContact) {
                                 val app = when (s.intent) {
                                     is ParsedIntent.SendWhatsApp -> ChatApp.WHATSAPP
-                                    is ParsedIntent.SendMessenger -> ChatApp.MESSENGER
                                     else -> ChatApp.SMS
                                 }
                                 screen = Screen.Dictate(contact, app)
@@ -822,7 +812,6 @@ private fun HomeScreen(
             item { BigTile("Mensagens", Icons.AutoMirrored.Filled.Message, Blue) { onTile(PickerMode.SMS) } }
             item { BigTile("Despertador", Icons.Filled.Alarm, Orange) { onAlarm() } }
             item { BigTile("WhatsApp", Icons.Filled.Chat, Teal) { onTile(PickerMode.WHATSAPP) } }
-            item { BigTile("Messenger", Icons.Filled.Forum, Purple) { onTile(PickerMode.MESSENGER) } }
             item { BigTile("SOS — Ajuda", Icons.Filled.Emergency, Red) { onSos() } }
         }
 

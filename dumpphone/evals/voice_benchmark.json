@@ -1,7 +1,7 @@
 {
-  "description": "Closed-loop voice benchmark for Dumpphone (extends voice_intents.json, does not duplicate it: those 15 canonical cases are included here only where noted as mirrored, with ids C01/W01/etc). Expected values are SEMANTIC truth, not current parser output — failures reveal parser bugs. Scoring splits intent accuracy from slot accuracy (contact/message/time/app), so a misheard contact name fails the slot, not the intent. Categories: canonical, formal, informal, elderly (slow, hesitant, kinship phrasing), mishearing (simulated STT errors, incl. the exact mis-spellings Android pt recognisers produce). Contacts fixture is fictional; never use real contacts for Tier C.",
+  "description": "Closed-loop voice benchmark for Dumpphone (extends voice_intents.json, does not duplicate it: those 15 canonical cases are included here only where noted as mirrored, with ids C01/W01/etc). Expected values are SEMANTIC truth, not current parser output — failures reveal parser bugs. Scoring splits intent accuracy from slot accuracy (contact/message/time/app), so a misheard contact name fails the slot, not the intent. Categories: canonical, formal, informal, elderly (slow, hesitant, kinship phrasing), mishearing (simulated STT errors, incl. the exact mis-spellings Android pt recognisers produce). Contacts fixture is fictional; never use real contacts for Tier C. Messenger is unsupported: those phrases expect MessengerRemoved and must not open an app or send.",
   "locale_default": "pt-PT",
-  "version": 1,
+  "version": 2,
   "contacts_fixture": [
     {"displayName": "Maria Silva", "phoneNumber": "+351910000001", "note": "fictional benchmark contact"},
     {"displayName": "Maria Santos", "phoneNumber": "+351910000002", "note": "ambiguity pair with Maria Silva"},
@@ -48,14 +48,14 @@
     {"id": "W11", "task": "whatsapp", "category": "formal", "transcript": "Envie uma mensagem no WhatsApp para a Ana Pereira a dizer boa noite", "expected": {"intent": "SendWhatsApp", "contactQuery": "ana pereira", "messageContains": "boa noite"}},
     {"id": "W12", "task": "whatsapp", "category": "elderly", "transcript": "Diz à Maria no WhatsApp que já cheguei", "expected": {"intent": "SendWhatsApp", "contactQuery": "maria", "messageContains": "cheguei"}},
 
-    {"id": "M01", "task": "messenger", "category": "canonical", "transcript": "Manda uma mensagem no Messenger para a Ana a dizer olá", "expected": {"intent": "SendMessenger", "contactQuery": "ana", "messageContains": "olá"}, "mirrors": "voice_intents.json"},
-    {"id": "M02", "task": "messenger", "category": "informal", "transcript": "Manda um Messenger para a Ana a dizer olá", "expected": {"intent": "SendMessenger", "contactQuery": "ana", "messageContains": "olá"}},
-    {"id": "M03", "task": "messenger", "category": "formal", "transcript": "Por favor, envie uma mensagem no Messenger para a Ana Pereira a dizer obrigada", "expected": {"intent": "SendMessenger", "contactQuery": "ana pereira", "messageContains": "obrigada"}},
-    {"id": "M04", "task": "messenger", "category": "informal", "transcript": "Manda mensagem no Facebook para o João a dizer olá", "expected": {"intent": "SendMessenger", "contactQuery": "joao", "messageContains": "olá"}},
-    {"id": "M05", "task": "messenger", "category": "elderly", "transcript": "Quero mandar uma mensagem à Ana pelo Messenger a dizer estou bem", "expected": {"intent": "SendMessenger", "contactQuery": "ana", "messageContains": "estou bem"}},
-    {"id": "M06", "task": "messenger", "category": "mishearing", "transcript": "Manda uma mensagem no Messenjer para a Ana a dizer olá", "expected": {"intent": "SendMessenger", "contactQuery": "ana", "messageContains": "olá"}},
-    {"id": "M07", "task": "messenger", "category": "informal", "transcript": "Abre o Messenger", "expected": {"intent": "OpenApp", "app": "MESSENGER"}},
-    {"id": "M08", "task": "messenger", "category": "elderly", "transcript": "Manda... uma mensagem no Messenger... para a Ana... a dizer olá", "expected": {"intent": "SendMessenger", "contactQuery": "ana", "messageContains": "olá"}, "note": "pauses, tts_rate 120"},
+    {"id": "M01", "task": "messenger", "category": "canonical", "transcript": "Manda uma mensagem no Messenger para a Ana a dizer olá", "expected": {"intent": "MessengerRemoved"}, "note": "Messenger is not on this phone. Do not open an app or send.", "mirrors": "voice_intents.json"},
+    {"id": "M02", "task": "messenger", "category": "informal", "transcript": "Manda um Messenger para a Ana a dizer olá", "expected": {"intent": "MessengerRemoved"}, "note": "Messenger is not on this phone. Do not open an app or send."},
+    {"id": "M03", "task": "messenger", "category": "formal", "transcript": "Por favor, envie uma mensagem no Messenger para a Ana Pereira a dizer obrigada", "expected": {"intent": "MessengerRemoved"}, "note": "Messenger is not on this phone. Do not open an app or send."},
+    {"id": "M04", "task": "messenger", "category": "informal", "transcript": "Manda mensagem no Facebook para o João a dizer olá", "expected": {"intent": "MessengerRemoved"}, "note": "Facebook Messenger is not on this phone. Do not open an app or send."},
+    {"id": "M05", "task": "messenger", "category": "elderly", "transcript": "Quero mandar uma mensagem à Ana pelo Messenger a dizer estou bem", "expected": {"intent": "MessengerRemoved"}, "note": "Messenger is not on this phone. Do not open an app or send."},
+    {"id": "M06", "task": "messenger", "category": "mishearing", "transcript": "Manda uma mensagem no Messenjer para a Ana a dizer olá", "expected": {"intent": "MessengerRemoved"}, "note": "Mishearing of Messenger. Do not open an app or send."},
+    {"id": "M07", "task": "messenger", "category": "informal", "transcript": "Abre o Messenger", "expected": {"intent": "MessengerRemoved"}, "note": "Do not launch Messenger."},
+    {"id": "M08", "task": "messenger", "category": "elderly", "transcript": "Manda... uma mensagem no Messenger... para a Ana... a dizer olá", "expected": {"intent": "MessengerRemoved"}, "note": "pauses, tts_rate 120. Do not open an app or send."},
 
     {"id": "A01", "task": "alarm", "category": "canonical", "transcript": "Põe o despertador para as sete e meia", "expected": {"intent": "SetAlarm", "hour": 7, "minute": 30}, "mirrors": "voice_intents.json"},
     {"id": "A02", "task": "alarm", "category": "canonical", "transcript": "Despertador às 8:15", "expected": {"intent": "SetAlarm", "hour": 8, "minute": 15}, "mirrors": "voice_intents.json"},
@@ -72,13 +72,13 @@
     {"id": "A13", "task": "alarm", "category": "formal", "transcript": "Despertador às seis e quarenta e cinco", "expected": {"intent": "SetAlarm", "hour": 6, "minute": 45}},
 
     {"id": "R01", "task": "read_messages", "category": "canonical", "transcript": "Ler as mensagens do WhatsApp", "expected": {"intent": "ReadMessages", "app": "WHATSAPP"}, "mirrors": "voice_intents.json"},
-    {"id": "R02", "task": "read_messages", "category": "canonical", "transcript": "Lê as mensagens do Messenger", "expected": {"intent": "ReadMessages", "app": "MESSENGER"}, "mirrors": "voice_intents.json"},
+    {"id": "R02", "task": "read_messages", "category": "canonical", "transcript": "Lê as mensagens do Messenger", "expected": {"intent": "MessengerRemoved"}, "note": "Messenger is not on this phone. Do not open it.", "mirrors": "voice_intents.json"},
     {"id": "R03", "task": "read_messages", "category": "elderly", "transcript": "Lê-me as mensagens novas", "expected": {"intent": "ReadMessages", "app": "WHATSAPP"}},
     {"id": "R04", "task": "read_messages", "category": "formal", "transcript": "Por favor, lê as minhas mensagens do WhatsApp", "expected": {"intent": "ReadMessages", "app": "WHATSAPP"}},
     {"id": "R05", "task": "read_messages", "category": "elderly", "transcript": "O que é que a Maria me mandou no WhatsApp?", "expected": {"intent": "ReadMessages", "app": "WHATSAPP"}},
     {"id": "R06", "task": "read_messages", "category": "elderly", "transcript": "Lê lá as mensagens, se faz favor", "expected": {"intent": "ReadMessages", "app": "WHATSAPP"}},
     {"id": "R07", "task": "read_messages", "category": "mishearing", "transcript": "Ler as mensagens do Uatsap", "expected": {"intent": "ReadMessages", "app": "WHATSAPP"}},
-    {"id": "R08", "task": "read_messages", "category": "informal", "transcript": "Ouvir as mensagens do Messenger", "expected": {"intent": "ReadMessages", "app": "MESSENGER"}},
+    {"id": "R08", "task": "read_messages", "category": "informal", "transcript": "Ouvir as mensagens do Messenger", "expected": {"intent": "MessengerRemoved"}, "note": "Messenger is not on this phone. Do not open it."},
 
     {"id": "E01", "task": "sos", "category": "canonical", "transcript": "Socorro!", "expected": {"intent": "Sos"}, "mirrors": "voice_intents.json"},
     {"id": "E02", "task": "sos", "category": "elderly", "transcript": "Preciso de ajuda", "expected": {"intent": "Sos"}},

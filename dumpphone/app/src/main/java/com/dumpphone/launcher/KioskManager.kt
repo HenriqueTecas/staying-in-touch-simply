@@ -22,7 +22,7 @@ class KioskManager(private val context: Context) {
     fun applyKioskPoliciesIfDeviceOwner(): Boolean {
         if (!isDeviceOwner()) return false
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dpm.setLockTaskPackages(admin, arrayOf(context.packageName, "com.whatsapp", "com.facebook.orca", "com.android.dialer", "com.google.android.dialer"))
+            dpm.setLockTaskPackages(admin, arrayOf(context.packageName, "com.whatsapp", "com.android.dialer", "com.google.android.dialer"))
         }
         return true
     }

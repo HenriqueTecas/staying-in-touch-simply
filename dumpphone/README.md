@@ -1,7 +1,7 @@
 # Dumpphone
 
 A Portuguese-first Android launcher that gives an elderly user a dumb-phone
-surface — **Ligar, Mensagens, Despertador, WhatsApp, Messenger, SOS** — backed
+surface — **Ligar, Mensagens, Despertador, WhatsApp, SOS** — backed
 by Portuguese voice control, with a strict safety rule: **no message is ever
 sent and no ambiguous contact is ever called without a spoken read-back
 confirmation.**
@@ -9,7 +9,7 @@ confirmation.**
 Architecture (locked plan): **intent first, accessibility second, VLM last
 resort.** Most tasks use deterministic Android intents (`tel:`, SMS,
 `AlarmClock`, `wa.me`); an AccessibilityService handles what intents cannot
-(open a named WhatsApp/Messenger chat, type a confirmed message, read messages
+(open a named WhatsApp chat, type a confirmed message, read messages
 aloud); a provider-agnostic vision-model loop exists only as an opt-in,
 consented, step-capped fallback — and runs as an honest **demo** when no API
 key is configured.
@@ -38,11 +38,12 @@ the deliverable folder, or built with `./gradlew assembleDebug` →
 4. **Make Dumpphone the home screen:** press the phone's Home button and
    choose **Dumpphone → Always**, or go to Dumpphone → gear icon → caregiver
    PIN (`1234`) → **"Escolher Dumpphone como ecrã inicial"** and select it.
-5. **Enable accessibility (needed for Messenger + reading messages aloud):**
+5. **Enable accessibility (needed for reading WhatsApp messages aloud):**
    gear icon → PIN → **"Ativar acessibilidade do Dumpphone"** → find
    **Dumpphone** in the list → turn it on → confirm Android's warning.
-   WhatsApp, calls, SMS and alarms work without this; Messenger typing and
-   "Ler as minhas mensagens" do not.
+   Calls, SMS, alarms, and opening WhatsApp work without this; reading
+   messages aloud from the WhatsApp screen does not. Messenger is not
+   available on this phone.
 6. **Caregiver setup (do this once, before handing the phone over):**
    gear icon → PIN `1234` → set the Portuguese variant (**pt-PT** default,
    pt-BR if needed), the **SOS contact name + number** (empty = 112),
@@ -55,11 +56,10 @@ irreversibly; uninstalling Dumpphone restores everything.
 
 ## Using it (what the elderly user sees)
 
-- Six huge buttons. Favourite (starred) contacts below — tap a face/name to call.
+- Large buttons: Ligar, Mensagens, Despertador, WhatsApp, and SOS. Favourite contacts below — tap a name to call.
 - **FALAR** (big black button): push-to-talk, in Portuguese. Try:
   - *"Ligar para a Maria"*
   - *"Manda um WhatsApp à Maria a dizer já cheguei"*
-  - *"Manda uma mensagem no Messenger para a Ana a dizer olá"*
   - *"Põe o despertador para as sete e meia"*
   - *"Ler as mensagens do WhatsApp"*
   - *"Socorro"* (SOS)
@@ -80,7 +80,7 @@ echo "sdk.dir=/path/to/android-sdk" > local.properties   # or set ANDROID_HOME
 
 Validated in the build environment for this deliverable: **52/52 unit tests
 pass, `assembleDebug` succeeds.** Everything else (real STT/TTS voices,
-WhatsApp/Messenger behaviour, HOME-launcher replacement, LockTask) can only
+WhatsApp behaviour, HOME-launcher replacement, LockTask) can only
 be verified on the physical pilot phone — see the checklist in
 `docs/BASELINE.md`.
 
@@ -92,26 +92,27 @@ app/src/main/java/com/dumpphone/
   voice/     SpeechRecognizer (pt, on-device preferred) + cloud-STT stub,
              rule-based PT intent parser (+ LLM-pluggable interface), TTS
   router/    Tier 1 / 2 / 3 routing decisions
-  actions/   Tier-1 intents: tel:, sms:, AlarmClock, wa.me, m.me
-  a11y/      AccessibilityService executor + WhatsApp/Messenger flows
+  actions/   Tier-1 intents: tel:, sms:, AlarmClock, wa.me
+  a11y/      AccessibilityService executor + WhatsApp flows
   vlm/       Provider-agnostic VLM loop: consent, narration, step/cost caps,
              stop-and-ask; MockVlmClient demo when no key is configured
   safety/    Confirmation policy, PT contact matching (nicknames),
              caregiver PIN (salted hash), plain-language action log
   data/      Contacts, settings, pt-PT/pt-BR variant
 docs/        BASELINE.md (Phase 0), KIOSK.md (Phase 7)
-evals/       PT voice-intent cases + WhatsApp/Messenger automation scenarios
+evals/       PT voice-intent cases + WhatsApp automation scenarios
 ```
 
 ## Honest limitations of this pilot
 
-- **Tier 2 is best-effort.** WhatsApp/Messenger have no official personal
-  APIs; app updates can break accessibility node matching. Failures are
-  spoken aloud and **nothing is sent** — re-run `evals/automation_scenarios.json`
-  after those apps update.
-- **Messenger cannot pre-fill text via deep link**, so without accessibility
-  the app opens the chat and says plainly that it cannot type for the user.
-  It never falsely claims a message was sent.
+- **Tier 2 is best-effort.** WhatsApp has no official personal API; app
+  updates can break accessibility node matching. Failures are spoken aloud
+  and **nothing is sent** — re-run `evals/automation_scenarios.json` after
+  WhatsApp updates.
+- **Messenger is not a capability.** Saying Messenger or Facebook stays
+  inside Dumpphone and speaks that it is not on this phone. The app does
+  not open `m.me` or the Facebook Messenger app, and it does not type a
+  message there.
 - **Tier 3 (VLM) is a demo without a configured endpoint + key**, and its
   HTTP transport is a stub (`HttpVlmClient`) — by design, it does not pretend
   a real vision model works without one. Screenshots are never captured or

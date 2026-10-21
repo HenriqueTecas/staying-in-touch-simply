@@ -12,7 +12,7 @@ import com.dumpphone.voice.ChatApp
  * opens named chats, types the (already confirmed) message, taps send, and
  * reads the latest on-screen messages so the launcher can speak them.
  *
- * Honest limits: WhatsApp/Messenger UI updates can break node matching.
+ * Honest limits: WhatsApp UI updates can break node matching.
  * Every flow returns a Boolean and the caller falls back to Tier 1 / asks
  * the user instead of tapping blindly. Nothing is sent from here without
  * the caller having run the Phase 4 confirmation first.

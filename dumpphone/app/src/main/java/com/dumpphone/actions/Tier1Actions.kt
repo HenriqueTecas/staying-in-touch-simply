@@ -41,16 +41,19 @@ object IntentFactory {
 
     fun whatsAppOpen(): Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/"))
 
-    /** Messenger: m.me/<username> when known, otherwise just open the app / m.me. */
-    fun messengerChat(username: String?, message: String): Intent {
-        val url = if (!username.isNullOrBlank()) "https://m.me/$username" else "https://m.me/"
-        return Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
-            // The text cannot be pre-filled via m.me; Tier 2 (accessibility) types it after confirmation.
-            putExtra(Intent.EXTRA_TEXT, message)
+    fun openPackage(packageName: String): Intent? = null // resolved via PackageManager at launch time
+
+    /** Messenger deep links and the Facebook Messenger package are not launchable. */
+    fun isMessengerTarget(intent: Intent): Boolean {
+        val host = intent.data?.host?.lowercase().orEmpty()
+        if (host == "m.me" || host.endsWith(".m.me") || host == "messenger.com" || host.endsWith(".messenger.com")) {
+            return true
         }
+        val pkg = intent.`package` ?: intent.component?.packageName
+        return pkg == "com.facebook.orca"
     }
 
-    fun openPackage(packageName: String): Intent? = null // resolved via PackageManager at launch time
+    fun isMessengerPackage(packageName: String): Boolean = packageName == "com.facebook.orca"
 }
 
 class Tier1Actions(private val context: Context) {
@@ -62,13 +65,16 @@ class Tier1Actions(private val context: Context) {
 
     private fun held(message: String = DummyMode.HELD_CALL): LaunchResult = LaunchResult.Failed(message)
 
-    private fun launch(intent: Intent, chooserTitle: String? = null): LaunchResult = try {
-        val toLaunch = if (chooserTitle != null) Intent.createChooser(intent, chooserTitle) else intent
-        toLaunch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(toLaunch)
-        LaunchResult.Launched
-    } catch (e: Exception) {
-        LaunchResult.Failed("Não consegui abrir. ${e.message ?: ""}".trim())
+    private fun launch(intent: Intent, chooserTitle: String? = null): LaunchResult {
+        if (IntentFactory.isMessengerTarget(intent)) return LaunchResult.Failed(DummyMode.MESSENGER_REMOVED)
+        return try {
+            val toLaunch = if (chooserTitle != null) Intent.createChooser(intent, chooserTitle) else intent
+            toLaunch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(toLaunch)
+            LaunchResult.Launched
+        } catch (e: Exception) {
+            LaunchResult.Failed("Não consegui abrir. ${e.message ?: ""}".trim())
+        }
     }
 
     fun dial(phone: String): LaunchResult = if (DummyMode.ENABLED) held() else launch(IntentFactory.dial(phone))
@@ -97,10 +103,8 @@ class Tier1Actions(private val context: Context) {
         }
     }
 
-    fun messenger(username: String?, message: String): LaunchResult =
-        if (DummyMode.ENABLED) held(DummyMode.HELD_MESSAGE) else launch(IntentFactory.messengerChat(username, message))
-
     fun openApp(packageName: String): LaunchResult {
+        if (IntentFactory.isMessengerPackage(packageName)) return LaunchResult.Failed(DummyMode.MESSENGER_REMOVED)
         if (DummyMode.ENABLED) return held(DummyMode.HELD_MESSAGE)
         val intent = context.packageManager.getLaunchIntentForPackage(packageName)
             ?: return LaunchResult.Failed("Essa aplicação não está instalada.")

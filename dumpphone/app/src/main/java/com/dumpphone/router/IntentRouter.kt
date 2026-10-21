@@ -27,9 +27,8 @@ class IntentRouter(private val vlmConsentGranted: Boolean, private val accessibi
             if (contactHasPhone) RouteDecision(Tier.TIER1_INTENT, "WhatsApp aberto com a conversa e o texto já escritos (wa.me).")
             else RouteDecision(Tier.TIER2_ACCESSIBILITY, "Sem número: abrir a conversa pelo nome no WhatsApp.", needsAccessibility = true)
 
-        is ParsedIntent.SendMessenger ->
-            // m.me cannot pre-fill text, so typing the confirmed message needs Tier 2.
-            RouteDecision(Tier.TIER2_ACCESSIBILITY, "Abrir a conversa no Messenger e escrever o texto confirmado.", needsAccessibility = true)
+        is ParsedIntent.MessengerRemoved ->
+            RouteDecision(Tier.TIER1_INTENT, "O Messenger não está neste telemóvel. Nenhuma aplicação é aberta.")
 
         is ParsedIntent.ReadMessages ->
             RouteDecision(Tier.TIER2_ACCESSIBILITY, "Ler as mensagens no ecrã e lê-las em voz alta.", needsAccessibility = true)

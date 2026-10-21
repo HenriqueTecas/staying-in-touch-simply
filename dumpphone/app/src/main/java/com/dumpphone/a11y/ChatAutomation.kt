@@ -38,27 +38,8 @@ class ChatAutomation(private val context: Context) {
         else Result.Failed("A conversa abriu, mas não consegui enviar. A mensagem não foi enviada.")
     }
 
-    fun sendMessengerTier2(contact: Contact, message: String): Result {
-        if (DummyMode.ENABLED) return Result.Failed(DummyMode.HELD_MESSAGE)
-        val service = DumpphoneAccessibilityService.instance
-        if (service == null) {
-            // Graceful Tier 1 fallback: open m.me chat; the user dictates/types there.
-            val launched = tier1.messenger(contact.messengerUsername, message)
-            return if (launched is Tier1Actions.LaunchResult.Launched)
-                Result.Failed("Abri o Messenger. Escreva a mensagem na conversa — sem acessibilidade não consigo escrever por si.")
-            else Result.NeedsAccessibility("Ative o serviço de acessibilidade do Dumpphone nas Definições do telefone.")
-        }
-        tier1.openApp(ChatApp.MESSENGER.packageName)
-        Thread.sleep(1200)
-        if (!service.openChatByName(contact.displayName)) {
-            return Result.Failed("Não encontrei a conversa com ${contact.displayName} no Messenger.")
-        }
-        Thread.sleep(800)
-        return if (service.typeAndSend(message)) Result.Done
-        else Result.Failed("A conversa abriu, mas não consegui enviar. A mensagem não foi enviada.")
-    }
-
     fun readLatestMessages(app: ChatApp): Result2 {
+        if (app.packageName == "com.facebook.orca") return Result2.Failed(DummyMode.MESSENGER_REMOVED)
         if (DummyMode.ENABLED) return Result2.Failed(DummyMode.HELD_MESSAGE)
         val service = DumpphoneAccessibilityService.instance
             ?: return Result2.NeedsAccessibility("Ative o serviço de acessibilidade do Dumpphone para eu poder ler as mensagens.")

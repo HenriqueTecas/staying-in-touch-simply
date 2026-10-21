@@ -33,17 +33,16 @@ class RuleBasedIntentParser : IntentParser {
         }
         if (t == "ajuda" || t.startsWith("o que podes") || t.startsWith("o que pode")) return ParsedIntent.Help
 
+        // Messenger is not a capability. Refuse before any open/send/read branch.
+        if (t.contains("messenger") || t.contains("facebook")) return ParsedIntent.MessengerRemoved
+
         // --- Read messages aloud ---
         val mentionsWhatsApp = t.contains("whatsapp")
-        val mentionsMessenger = t.contains("messenger") || t.contains("facebook")
         if (((t.contains("ler") || t.contains("le ") || t.contains("ouvir") || t.contains("novas mensagens")) &&
-                (t.contains("mensag") || mentionsWhatsApp || mentionsMessenger)) ||
-            (t.contains("mandou") && !t.contains("dizer") && !t.contains("manda") &&
-                (mentionsWhatsApp || mentionsMessenger))
+                (t.contains("mensag") || mentionsWhatsApp)) ||
+            (t.contains("mandou") && !t.contains("dizer") && !t.contains("manda") && mentionsWhatsApp)
         ) {
-            return ParsedIntent.ReadMessages(
-                when { mentionsMessenger -> ChatApp.MESSENGER; mentionsWhatsApp -> ChatApp.WHATSAPP; else -> ChatApp.WHATSAPP }
-            )
+            return ParsedIntent.ReadMessages(ChatApp.WHATSAPP)
         }
 
         // Polite/request prefixes a recogniser keeps: strip so verb checks below see the verb.
@@ -56,7 +55,6 @@ class RuleBasedIntentParser : IntentParser {
         // "Quero falar com a Maria (no WhatsApp)": open the chat, or call when no app is named.
         if (v.contains("falar com")) {
             if (mentionsWhatsApp) return ParsedIntent.OpenApp(ChatApp.WHATSAPP)
-            if (mentionsMessenger) return ParsedIntent.OpenApp(ChatApp.MESSENGER)
             val after = v.substringAfter("falar com ").removePrefix("a ").removePrefix("o ")
                 .removePrefix("minha filha ").removePrefix("meu filho ")
                 .removePrefix("minha mae ").removePrefix("meu pai ")
@@ -76,10 +74,9 @@ class RuleBasedIntentParser : IntentParser {
 
         // --- Send messages (check before plain calls: they also contain "para") ---
         parseSend(v, raw, ChatApp.WHATSAPP)?.let { return it }
-        parseSend(v, raw, ChatApp.MESSENGER)?.let { return it }
         if (v.contains("sms") || v.startsWith("mensagem para") || v.startsWith("manda mensagem") ||
             v.startsWith("envia mensagem") || v.startsWith("mandar mensagem") || v.startsWith("enviar mensagem") ||
-            (v.contains("mensagem") && !mentionsWhatsApp && !mentionsMessenger &&
+            (v.contains("mensagem") && !mentionsWhatsApp &&
                 listOf("manda", "envia", "mandar", "enviar", "escreve").any { v.contains(it) })
         ) {
             parseSend(v, raw, ChatApp.SMS)?.let { return it }
@@ -99,7 +96,6 @@ class RuleBasedIntentParser : IntentParser {
         if ((t.startsWith("abrir") || t.startsWith("abre") || t.startsWith("abrir o")) && mentionsWhatsApp) {
             return ParsedIntent.OpenApp(ChatApp.WHATSAPP)
         }
-        if ((t.startsWith("abrir") || t.startsWith("abre")) && mentionsMessenger) return ParsedIntent.OpenApp(ChatApp.MESSENGER)
 
         return ParsedIntent.Unknown(raw)
     }
@@ -107,7 +103,6 @@ class RuleBasedIntentParser : IntentParser {
     private fun parseSend(t: String, raw: String, app: ChatApp): ParsedIntent? {
         val isForApp = when (app) {
             ChatApp.WHATSAPP -> t.contains("whatsapp")
-            ChatApp.MESSENGER -> t.contains("messenger") || t.contains("facebook")
             ChatApp.SMS -> true
         }
         if (!isForApp) return null
@@ -121,13 +116,11 @@ class RuleBasedIntentParser : IntentParser {
             // "manda um WhatsApp à Maria" with no body: caller prompts for dictation next.
             return when (app) {
                 ChatApp.WHATSAPP -> ParsedIntent.SendWhatsApp(contact, "")
-                ChatApp.MESSENGER -> ParsedIntent.SendMessenger(contact, "")
                 ChatApp.SMS -> ParsedIntent.SendSms(contact, "")
             }
         }
         return when (app) {
             ChatApp.WHATSAPP -> ParsedIntent.SendWhatsApp(contact, message)
-            ChatApp.MESSENGER -> ParsedIntent.SendMessenger(contact, message)
             ChatApp.SMS -> ParsedIntent.SendSms(contact, message)
         }
     }
@@ -157,7 +150,7 @@ class RuleBasedIntentParser : IntentParser {
         while (rest.startsWith("para a ") || rest.startsWith("para o ") || rest.startsWith("para ")) {
             rest = rest.removePrefix("para a ").removePrefix("para o ").removePrefix("para ")
         }
-        val stopWords = listOf(" dizer", " a dizer", " dizer-lhe", " mensagem", " por whatsapp", " por messenger", " no whatsapp", " no messenger", " pelo whatsapp", " pelo messenger", " pelo facebook")
+        val stopWords = listOf(" dizer", " a dizer", " dizer-lhe", " mensagem", " por whatsapp", " no whatsapp", " pelo whatsapp")
         val earliestStop = stopWords.mapNotNull { stop ->
             rest.indexOf(stop).takeIf { it >= 0 }?.let { it to stop }
         }.minByOrNull { it.first }

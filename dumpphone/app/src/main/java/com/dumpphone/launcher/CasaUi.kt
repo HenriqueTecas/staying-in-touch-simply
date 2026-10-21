@@ -151,10 +151,16 @@ internal fun CasaHome(
             PastelTile("WhatsApp", "Conversas", Color(0xFFE5F6EA), CallGreen, Icons.Filled.Forum, Modifier.weight(1f)) { onChats() }
         }
         Spacer(Modifier.height(10.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            PastelTile("Messenger", "Falar no Facebook", Color(0xFFF3E9FB), Color(0xFF7C5CBF), Icons.Filled.ChatBubble, Modifier.weight(1f)) { onTile(PickerMode.MESSENGER) }
-            PastelTile("SOS — Ajuda", "Emergência, 1 toque", SosRed, Color.White, Icons.Filled.Warning, Modifier.weight(1f), titleColor = Color.White, subColor = Color.White.copy(alpha = 0.9f)) { onSos() }
-        }
+        PastelTile(
+            "SOS — Ajuda",
+            "Emergência, 1 toque",
+            SosRed,
+            Color.White,
+            Icons.Filled.Warning,
+            Modifier.fillMaxWidth(),
+            titleColor = Color.White,
+            subColor = Color.White.copy(alpha = 0.9f),
+        ) { onSos() }
         Spacer(Modifier.height(14.dp))
         Text("Pessoas importantes", color = InkBrown, fontWeight = FontWeight.Bold, fontSize = 18.sp)
         Text("Toque numa pessoa para ligar", color = Muted, fontSize = 14.sp)
@@ -287,10 +293,9 @@ internal fun CasaConfirm(intent: ParsedIntent, contact: Contact?, heard: String?
                 val name = contact?.displayName ?: "esse contacto"
                 append("Quer ligar para $artigo $name?")
             }
-            is ParsedIntent.SendWhatsApp, is ParsedIntent.SendMessenger, is ParsedIntent.SendSms -> {
+            is ParsedIntent.SendWhatsApp, is ParsedIntent.SendSms -> {
                 val msg = when (intent) {
                     is ParsedIntent.SendWhatsApp -> intent.message
-                    is ParsedIntent.SendMessenger -> intent.message
                     is ParsedIntent.SendSms -> intent.message
                     else -> ""
                 }
@@ -447,7 +452,7 @@ internal fun CasaReadAloud(
 
 @Composable
 internal fun CasaDictate(contact: Contact, app: ChatApp, draft: String, onBack: () -> Unit) {
-    val appName = when (app) { ChatApp.WHATSAPP -> "WhatsApp"; ChatApp.MESSENGER -> "Messenger"; ChatApp.SMS -> "Mensagem" }
+    val appName = when (app) { ChatApp.WHATSAPP -> "WhatsApp"; ChatApp.SMS -> "Mensagem" }
     val first = contact.displayName.substringBefore(" ")
     Column(Modifier.fillMaxSize().padding(18.dp)) {
         CasaBack(onBack)
