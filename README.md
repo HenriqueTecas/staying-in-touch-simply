@@ -24,5 +24,6 @@ Red text and `[square brackets]` mark what the team fills in after each co-desig
 - `session-materials/` — printable communication map, 16 action cards, blank cards, sorting mats, storyboard sheet and actual-size phone templates. Page 1 says how to print each one. Build with `tectonic materials.tex`.
 - `session-materials/sessions-1-2-script.md` — fictional rehearsal script for piloting the sessions; Manuel is a character in this script.
 - `research/` — source notes and verification details for the related work and secondary research cited in the paper.
+- `design/casa-quentinha/` — phone screen examples for the warm launcher: FALAR in the center, Ligar on the left, Desligar on the right.
 - Project declaration (bilingual, to print and sign): https://claude.ai/code/artifact/9ec19914-c4fc-4949-8408-20d660aed215
 - Session kit (plans for sessions 1 and 2, interview guide, debrief template): https://claude.ai/code/artifact/d4470188-34c6-4df5-a868-18fab1650df3
