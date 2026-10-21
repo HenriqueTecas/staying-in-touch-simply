@@ -15,9 +15,12 @@ Red text and `[square brackets]` mark what the team fills in after each co-desig
 
 - `paper/` — research paper in the ACM template (`acmart`, `acmtog` style). Build with `tectonic main.tex`, or upload the folder to Overleaf.
 - `paper/drafts/main-detailed.pdf` — the longer, 7-page version of the paper, to draw on for the final paper.
+- `paper/Staying_in_Touch_Simply.pdf` — the team's edited mid-term paper; `Staying_in_Touch_Simply_IC.pdf` is the same paper with highlights.
 - `presentation/` — mid-term slides, with a script in the speaker notes.
 - `presentation/source/` — the script that generates the slides (`build.js`, with the statistics in `stats.js`).
+- `presentation/presentationv1.pptx` — the team's edited version of the mid-term slides.
 - `declaration/project-declaration.pdf` — one-page project declaration, in the course's example format, for Manuel, Henrique and João to sign; scan the signed copy for Fenix.
+- `declaration/project-declaration-signed.pdf` — the signed project declaration (dated 1 October 2026).
 - `session-materials/` — printable communication map, 16 action cards, blank cards, sorting mats, storyboard sheet and actual-size phone templates. Page 1 says how to print each one. Build with `tectonic materials.tex`.
 - `session-materials/sessions-1-2-script.md` — fictional rehearsal script for piloting the sessions; Manuel is a character in this script.
 - `research/` — source notes and verification details for the related work and secondary research cited in the paper.
