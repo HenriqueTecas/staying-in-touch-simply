@@ -1,0 +1,242 @@
+{
+  "status": "PETG fit prototype; perimeter ring fit reported by user; depth, retention and hardware fit still need physical testing",
+  "parts": {
+    "01_back_case_PETG": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28525.725,
+      "bounds_mm": [
+        81.2,
+        167.4,
+        12.3
+      ],
+      "triangles": 3884,
+      "non_manifold_edges": 0
+    },
+    "02_removable_keyguard_PETG": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3823.078,
+      "bounds_mm": [
+        84.2,
+        42.8,
+        10.5
+      ],
+      "triangles": 3172,
+      "non_manifold_edges": 0
+    },
+    "04_snap_socket_coupon_PETG": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 491.476,
+      "bounds_mm": [
+        7.6,
+        14.0,
+        12.3
+      ],
+      "triangles": 36,
+      "non_manifold_edges": 0
+    },
+    "05_snap_clip_coupon_PETG": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 223.925,
+      "bounds_mm": [
+        9.1,
+        11.6,
+        10.5
+      ],
+      "triangles": 168,
+      "non_manifold_edges": 0
+    },
+    "06_phone_retaining_tab_coupon_PETG": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 546.779,
+      "bounds_mm": [
+        8.1,
+        18.0,
+        12.3
+      ],
+      "triangles": 564,
+      "non_manifold_edges": 0
+    }
+  },
+  "interfaces": {
+    "back_to_keyguard_overlap_mm3": 0.0,
+    "back_to_nominal_phone_overlap_mm3": 0.0,
+    "keyguard_to_nominal_phone_overlap_mm3": 0.0,
+    "screen_to_keyguard_face_mm": 3.5,
+    "keyguard_to_back_rim_gap_mm": 0.29999999999999893,
+    "nominal_hook_engagement_mm": 0.5,
+    "screen_holes_clear": [
+      true,
+      true,
+      true
+    ]
+  },
+  "fit_evidence": {
+    "date": "2026-10-21",
+    "source": "Current conversation: user reported the named printed ring fits the phone without forcing it",
+    "coupon": "Perimeter_R11.3_C0.30_PETG_FIT_TEST_ONLY.stl",
+    "profile": {
+      "nominal_body_width": 76.6,
+      "nominal_body_height": 162.8,
+      "modeled_corner_radius": 11.3,
+      "clearance_per_side": 0.3
+    },
+    "claim_limit": "A qualitative fit report for the 2 mm ring; not a measurement of actual corner radius, thickness, camera or ports"
+  },
+  "unverified": [
+    "Full-depth fit, camera/bar and access windows",
+    "Both clip systems: force, retention and fatigue",
+    "Screen protector clearance",
+    "Android UI button alignment and system gestures",
+    "Print material shrinkage and support removal",
+    "Lens protection and drop performance"
+  ],
+  "phone_retention": {
+    "tabs": 4,
+    "nominal_overlap_per_side_mm": 0.4000000000000057,
+    "glass_to_lip_underside_mm": 0.5999999999999996,
+    "nominal_required_tab_deflection_mm": 0.4000000000000057,
+    "mouth_test": "Undeformed lips intentionally interfere during insertion; no other solid intersects sampled insertion poses",
+    "insertion_samples": [
+      {
+        "phone_lift_mm": 0,
+        "lip_intersection_mm3": 0.0,
+        "nonlip_intersection_mm3": 0.0
+      },
+      {
+        "phone_lift_mm": 0.3,
+        "lip_intersection_mm3": 0.0,
+        "nonlip_intersection_mm3": 0.0
+      },
+      {
+        "phone_lift_mm": 0.6,
+        "lip_intersection_mm3": 0.0,
+        "nonlip_intersection_mm3": 0.0
+      },
+      {
+        "phone_lift_mm": 1,
+        "lip_intersection_mm3": 6.4,
+        "nonlip_intersection_mm3": 0.0
+      },
+      {
+        "phone_lift_mm": 2,
+        "lip_intersection_mm3": 11.2,
+        "nonlip_intersection_mm3": 0.0
+      },
+      {
+        "phone_lift_mm": 5,
+        "lip_intersection_mm3": 11.2,
+        "nonlip_intersection_mm3": 0.0
+      },
+      {
+        "phone_lift_mm": 9,
+        "lip_intersection_mm3": 11.2,
+        "nonlip_intersection_mm3": 0.0
+      },
+      {
+        "phone_lift_mm": 12,
+        "lip_intersection_mm3": 0.0,
+        "nonlip_intersection_mm3": 0.0
+      }
+    ],
+    "force_and_strength_validated": false
+  },
+  "serialized_stl_checks": {
+    "01_back_case_PETG.stl": {
+      "triangles": 3884,
+      "non_manifold_edges": 0,
+      "positive_signed_volume_mm3": 28524.989,
+      "volume_error_vs_CAD_percent": 0.00258,
+      "on_print_bed_z0": true
+    },
+    "02_removable_keyguard_PETG.stl": {
+      "triangles": 3172,
+      "non_manifold_edges": 0,
+      "positive_signed_volume_mm3": 3823.454,
+      "volume_error_vs_CAD_percent": 0.00983,
+      "on_print_bed_z0": true
+    },
+    "04_snap_socket_coupon_PETG.stl": {
+      "triangles": 36,
+      "non_manifold_edges": 0,
+      "positive_signed_volume_mm3": 491.476,
+      "volume_error_vs_CAD_percent": 0.0,
+      "on_print_bed_z0": true
+    },
+    "05_snap_clip_coupon_PETG.stl": {
+      "triangles": 168,
+      "non_manifold_edges": 0,
+      "positive_signed_volume_mm3": 223.925,
+      "volume_error_vs_CAD_percent": 7e-05,
+      "on_print_bed_z0": true
+    },
+    "06_phone_retaining_tab_coupon_PETG.stl": {
+      "triangles": 564,
+      "non_manifold_edges": 0,
+      "positive_signed_volume_mm3": 546.78,
+      "volume_error_vs_CAD_percent": 0.00016,
+      "on_print_bed_z0": true
+    }
+  },
+  "3mf_checks": {
+    "00_PRINT_FIRST_Clips_PETG.3mf": {
+      "objects": 3,
+      "bed_bounds_mm": [
+        [
+          46.2,
+          43.0,
+          53.8,
+          57.0
+        ],
+        [
+          65.45,
+          44.2,
+          74.55,
+          55.8
+        ],
+        [
+          85.95,
+          41.0,
+          94.05,
+          59.0
+        ]
+      ],
+      "volumes_mm3": {
+        "04_snap_socket_coupon_PETG": 491.476,
+        "05_snap_clip_coupon_PETG": 223.925,
+        "06_phone_retaining_tab_coupon_PETG": 546.78
+      },
+      "closed_manifolds": true,
+      "bed_placement_checked": true,
+      "printer_settings_included": false
+    },
+    "Pixel_9_Pro_XL_Rev_B_PETG_Parts.3mf": {
+      "objects": 2,
+      "bed_bounds_mm": [
+        [
+          14.399999999999999,
+          16.299999999999997,
+          95.6,
+          183.7
+        ],
+        [
+          107.9,
+          78.6,
+          192.1,
+          121.4
+        ]
+      ],
+      "volumes_mm3": {
+        "01_back_case_PETG": 28524.989,
+        "02_removable_keyguard_PETG": 3823.454
+      },
+      "closed_manifolds": true,
+      "bed_placement_checked": true,
+      "printer_settings_included": false
+    }
+  }
+}

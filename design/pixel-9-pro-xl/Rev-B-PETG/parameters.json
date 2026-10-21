@@ -1,0 +1,98 @@
+{
+  "revision": "B",
+  "units": "mm",
+  "status": "PETG fit prototype; perimeter ring fit reported by user; depth, retention and hardware fit still need physical testing",
+  "phone": {
+    "width": 76.6,
+    "height": 162.8,
+    "thickness": 8.5,
+    "corner_radius_assumed": 11.3,
+    "source": "https://support.google.com/pixelphone/answer/7158570?hl=en"
+  },
+  "back_case": {
+    "side_clearance": 0.3,
+    "wall": 2.0,
+    "back_thickness": 2.0,
+    "front_z": 10.3,
+    "camera_window_width_assumed": 74.0,
+    "camera_window_height_assumed": 36.0,
+    "camera_center_y_assumed": 54.4,
+    "camera_window_radius": 12.0,
+    "bottom_access_width": 62.0,
+    "right_control_window_y_min_assumed": -5.0,
+    "right_control_window_y_max_assumed": 43.0,
+    "access_windows_open_to_front": true,
+    "retention": {
+      "clip_y": [
+        -28.0,
+        61.0
+      ],
+      "clip_width": 10.0,
+      "clip_thickness": 1.0,
+      "root_z": 1.3,
+      "root_taper_height": 1.2,
+      "slot_width": 1.0,
+      "nose_inward_from_cavity": 0.7,
+      "nose_tip_z": 9.6,
+      "lip_underside_z": 9.1,
+      "top_z": 10.3
+    }
+  },
+  "keyguard": {
+    "height_from_phone_bottom": 39.0,
+    "hole_row_from_phone_bottom": 20.0,
+    "hole_x": [
+      -25.0,
+      0.0,
+      25.0
+    ],
+    "hole_diameters": [
+      18.0,
+      24.0,
+      18.0
+    ],
+    "plate_bottom_z": 10.6,
+    "plate_thickness": 1.4,
+    "hole_flare_radial": 0.7,
+    "hole_flare_depth": 0.65,
+    "outer_offset_from_case": 1.5,
+    "clip_y": [
+      -64.0,
+      -47.0
+    ],
+    "clip_width": 8.0,
+    "clip_thickness": 1.0,
+    "clip_side_clearance": 0.3,
+    "clip_bottom_z": 1.5,
+    "hook_tip_z": 2.05,
+    "hook_upper_z": 2.7,
+    "hook_projection": 0.8,
+    "socket_depth": 0.65,
+    "socket_y_clearance": 0.4,
+    "socket_bottom_z": 1.25,
+    "socket_top_z": 2.95
+  },
+  "display_reference": {
+    "active_width_assumed": 70.2,
+    "active_height_assumed": 156.3,
+    "pixel_width": 1344,
+    "pixel_height": 2992,
+    "note": "Alignment illustration only. Active display origin and UI coordinates require checking on the real phone."
+  },
+  "materials_intended": {
+    "back_case": "PETG, four individual phone-retaining spring tabs",
+    "keyguard": "PETG, four removable panel clips"
+  },
+  "fit_evidence": {
+    "date": "2026-10-21",
+    "source": "Current conversation: user reported the named printed ring fits the phone without forcing it",
+    "coupon": "Perimeter_R11.3_C0.30_PETG_FIT_TEST_ONLY.stl",
+    "profile": {
+      "nominal_body_width": 76.6,
+      "nominal_body_height": 162.8,
+      "modeled_corner_radius": 11.3,
+      "clearance_per_side": 0.3
+    },
+    "claim_limit": "A qualitative fit report for the 2 mm ring; not a measurement of actual corner radius, thickness, camera or ports"
+  }
+}

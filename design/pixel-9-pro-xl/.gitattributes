@@ -1,0 +1,7 @@
+# CAD exports and generated preview data are reviewed through their source.
+*.step -diff -text
+*.stl -diff -text
+*.3mf -diff -text
+Rev-B-PETG/preview/three.min.js -diff
+Rev-B-PETG/preview/Open_3D_Preview.html -diff
+Rev-B-PETG/preview/mesh.json -diff
