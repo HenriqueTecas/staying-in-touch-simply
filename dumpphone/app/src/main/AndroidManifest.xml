@@ -28,6 +28,7 @@
         <!-- Default HOME launcher (Phase 1). Also a normal launcher entry so it can be opened for setup. -->
         <activity
             android:name=".launcher.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:launchMode="singleTask"
             android:stateNotNeeded="true"
