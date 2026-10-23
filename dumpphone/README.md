@@ -56,7 +56,7 @@ irreversibly; uninstalling Dumpphone restores everything.
 ## Using it (what the elderly user sees)
 
 - Large buttons: Ligar, Mensagens, Despertador, WhatsApp, and SOS. Favourite contacts below — tap a name to call.
-- **FALAR** (big black button): push-to-talk, in Portuguese. Try:
+- **FALAR** (large orange center button): push-to-talk, in Portuguese. Try:
   - *"Ligar para a Maria"*
   - *"Manda um WhatsApp à Maria a dizer já cheguei"*
   - *"Põe o despertador para as sete e meia"*
@@ -67,18 +67,49 @@ irreversibly; uninstalling Dumpphone restores everything.
   If two contacts share a name, it asks which one. It never guesses.
 - **SOS — Ajuda** (red) calls the SOS number (or 112) immediately, in one tap.
 
+## Pixel 9 Pro XL keyguard alignment
+
+The portrait launcher dock follows the [Revision B CAD parameters](../design/pixel-9-pro-xl/Rev-B-PETG/parameters.json).
+Gradle generates its geometry constants from that file on every changed build.
+
+| Control | Center from phone center | Opening diameter |
+| --- | --- | --- |
+| Ligar (green, left) | −25 mm | 18 mm |
+| FALAR (orange, center) | 0 mm | 24 mm |
+| Desligar (red, right) | +25 mm | 18 mm |
+
+All three centers are 20 mm from the **phone body bottom**. The CAD assumes a
+centered 70.2 × 156.3 mm active display, so the row is 16.75 mm above the display
+bottom. The app draws edge to edge and reserves the lower 35.75 mm of the active
+display for the keyguard. System navigation insets do not move the dock; status-bar
+and cutout insets apply to the content above it. Labels and icons sit inside the
+holes, and the controls keep their physical left-to-right order in all locales.
+Only the three labels have bounded text sizing to fit the holes; the rest of the
+interface follows Android's font size setting and scrolls above the covered area.
+
+The geometry scales with the full display bounds at both 1344 × 2992 and
+1008 × 2244 resolution, independently of Android's Display size setting.
+At native resolution the centers are approximately (193, 2671), (672, 2671), and
+(1151, 2671) pixels. This is alignment to the CAD reference, **not measured physical
+calibration**: check all three openings on the actual phone with the printed guard.
+Remove the guard for caregiver setup, Android navigation, or other apps. The profile
+is intended for a full-screen Pixel 9 Pro XL in portrait; other phones and split-screen
+windows do not establish physical fit.
+
 ## Build & test (developers)
 
 Requirements: JDK 17+, Android SDK platform 34 + build-tools 34.
 
 ```bash
 echo "sdk.dir=/path/to/android-sdk" > local.properties   # or set ANDROID_HOME
-./gradlew testDebugUnitTest   # 52 unit tests: parser, matching, router, safety, VLM loop
+./gradlew testDebugUnitTest   # includes CAD alignment and resolution/density regression checks
 ./gradlew assembleDebug       # -> app/build/outputs/apk/debug/app-debug.apk
+./gradlew lintDebug
 ```
 
-Validated in the build environment for this deliverable: **52/52 unit tests
-pass, `assembleDebug` succeeds.** Everything else (real STT/TTS voices,
+Validated for the keyguard update: **71/71 unit tests pass, `assembleDebug`
+and `lintDebug` succeed** (lint reports warnings, including the intentional portrait
+lock for the physical guard). Everything else (real STT/TTS voices,
 WhatsApp behaviour, HOME-launcher replacement, LockTask) can only
 be verified on the physical pilot phone — see the checklist in
 `docs/BASELINE.md`.

@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.provider.Settings
 import android.speech.RecognizerIntent
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -93,6 +95,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.BLACK),
+        )
         settingsStore = SettingsStore(this)
         speaker = AndroidSpeaker(this) { settingsStore.ptVariant }
         stt = FallbackSpeechToText(
@@ -566,7 +572,16 @@ private fun DumpphoneApp(activity: MainActivity) {
     }
 
     MaterialTheme(colorScheme = lightColorScheme(primary = CallGreen, background = Cream, onBackground = InkBrown)) {
-        Surface(Modifier.fillMaxSize(), color = Cream) {
+        val usesKeyguard = when (screen) {
+            Screen.PinGate, Screen.CaregiverSettings, Screen.ActionLogScreen,
+            is Screen.ShowMessages, is Screen.Notice -> false
+            else -> true
+        }
+        Surface(
+            if (usesKeyguard) Modifier.fillMaxSize()
+            else Modifier.fillMaxSize().safeDrawingPadding().imePadding(),
+            color = Cream,
+        ) {
             when (val s = screen) {
                 Screen.Home -> Docked {
                     CasaHome(

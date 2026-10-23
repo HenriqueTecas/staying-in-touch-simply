@@ -50,7 +50,9 @@ assembly clearance and 3MF placement; they do not establish physical fit.
 The screen graphics in the previews illustrate alignment only. The front covers
 the lower 39 mm of the phone except for its 18 / 24 / 18 mm holes, centered
 at X = −25 / 0 / +25 mm and 20 mm from the phone bottom. A real Android
-interface must be aligned to the measured screen position. The front can
+interface must be aligned to the measured screen position. The [Android launcher](../../dumpphone/README.md#pixel-9-pro-xl-keyguard-alignment)
+now derives its dock geometry from these parameters, using the provisional centered
+display reference; physical alignment still needs checking on the phone. The front can
 obstruct normal gesture navigation and can be removed when needed.
 
 ## Rebuild

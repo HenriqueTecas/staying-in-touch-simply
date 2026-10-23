@@ -20,10 +20,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +46,7 @@ import com.dumpphone.voice.ParsedIntent
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.math.roundToInt
 
 internal val Cream = Color(0xFFF8F1E7)
 internal val InkBrown = Color(0xFF2C2416)
@@ -57,36 +65,68 @@ internal fun CasaScaffold(
     listening: Boolean,
     content: @Composable () -> Unit,
 ) {
-    Column(Modifier.fillMaxSize().background(Cream)) {
-        Box(Modifier.weight(1f).fillMaxWidth()) { content() }
-        CasaDock(onLigar, onFalar, onDesligar, listening)
-    }
-}
-
-@Composable
-private fun CasaDock(onLigar: () -> Unit, onFalar: () -> Unit, onDesligar: () -> Unit, listening: Boolean) {
-    Row(
-        Modifier.fillMaxWidth().padding(horizontal = 28.dp, vertical = 10.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        DockButton("Ligar", Icons.Filled.Call, CallGreen, 64.dp, onLigar)
-        DockButton(if (listening) "A ouvir" else "FALAR", Icons.Filled.Mic, MicOrange, 92.dp, onFalar)
-        DockButton("Desligar", Icons.Filled.CallEnd, HangupRed, 64.dp, onDesligar)
-    }
-}
-
-@Composable
-private fun DockButton(label: String, icon: ImageVector, color: Color, size: androidx.compose.ui.unit.Dp, onClick: () -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.clickable(onClick = onClick)) {
-        Box(
-            Modifier.size(size).shadow(8.dp, CircleShape).clip(CircleShape).background(color),
-            contentAlignment = Alignment.Center,
-        ) {
-            Icon(icon, contentDescription = label, tint = Color.White, modifier = Modifier.size(size * 0.42f))
+    // Measure against the edge-to-edge display, before applying system insets to content.
+    // Absolute placement preserves the physical left/right mapping even in an RTL locale.
+    Layout(
+        modifier = Modifier.fillMaxSize().background(Cream),
+        content = {
+            Box(
+                Modifier.clipToBounds().windowInsetsPadding(
+                    WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
+                ),
+            ) { content() }
+            DockButton("Ligar", Icons.Filled.Call, CallGreen, onLigar)
+            DockButton("FALAR", Icons.Filled.Mic, MicOrange, onFalar, listening)
+            DockButton("Desligar", Icons.Filled.CallEnd, HangupRed, onDesligar)
+        },
+    ) { measurables, constraints ->
+        val width = constraints.maxWidth
+        val height = constraints.maxHeight
+        val geometry = keyguardGeometry(width.toFloat(), height.toFloat())
+        val contentHeight = (height - geometry.coveredHeight).roundToInt().coerceAtLeast(0)
+        val body = measurables[0].measure(Constraints.fixed(width, contentHeight))
+        val buttons = measurables.drop(1).zip(geometry.buttons).map { (measurable, hole) ->
+            val diameter = hole.diameter.roundToInt()
+            measurable.measure(Constraints.fixed(diameter, diameter))
         }
-        Spacer(Modifier.height(4.dp))
-        Text(label, color = InkBrown, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+        layout(width, height) {
+            body.place(0, 0)
+            buttons.zip(geometry.buttons).forEach { (button, hole) ->
+                button.place(
+                    (hole.centerX - button.width / 2f).roundToInt(),
+                    (hole.centerY - button.height / 2f).roundToInt(),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun DockButton(
+    label: String, icon: ImageVector, color: Color, onClick: () -> Unit, listening: Boolean = false,
+) {
+    BoxWithConstraints(
+        Modifier.clip(CircleShape).background(color)
+            .clickable(role = Role.Button, onClick = onClick)
+            .semantics(mergeDescendants = true) {
+                contentDescription = label
+                if (listening) stateDescription = "A ouvir"
+            },
+        contentAlignment = Alignment.Center,
+    ) {
+        // Both icon and label must be visible THROUGH the hole, not beneath the plate.
+        // Only these physical-control labels have a fixed physical size; screen text
+        // above the guard still follows the user's font setting. TalkBack reads the label.
+        val diameter = maxWidth
+        val labelSize = with(LocalDensity.current) { minOf(14.dp, diameter * 0.14f).toSp() }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(icon, contentDescription = null, tint = Color.White, modifier = Modifier.size(diameter * 0.36f))
+            Text(
+                if (listening) "A ouvir" else label,
+                color = Color.White, fontWeight = FontWeight.Bold, fontSize = labelSize, lineHeight = labelSize * 1.15f,
+                maxLines = 1, textAlign = TextAlign.Center,
+            )
+        }
     }
 }
 
@@ -420,7 +460,7 @@ internal fun CasaReadAloud(
     againLabel: String = "Ler outra vez",
 ) {
     val relation = (contact?.relation ?: thread.relation).uppercase()
-    Column(Modifier.fillMaxSize().padding(18.dp)) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp)) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             CasaBack(onBack)
             Surface(shape = RoundedCornerShape(20.dp), color = CallGreen) {
@@ -454,7 +494,7 @@ internal fun CasaReadAloud(
 internal fun CasaDictate(contact: Contact, app: ChatApp, draft: String, onBack: () -> Unit) {
     val appName = when (app) { ChatApp.WHATSAPP -> "WhatsApp"; ChatApp.SMS -> "Mensagem" }
     val first = contact.displayName.substringBefore(" ")
-    Column(Modifier.fillMaxSize().padding(18.dp)) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp)) {
         CasaBack(onBack)
         Spacer(Modifier.height(12.dp))
         Text("$appName para ${comArtigo(contact)} $first", color = InkBrown, fontSize = 30.sp, fontWeight = FontWeight.Bold)
@@ -491,7 +531,7 @@ internal fun CasaDictate(contact: Contact, app: ChatApp, draft: String, onBack: 
 internal fun CasaAlarm(onBack: () -> Unit, onSet: (Int, Int) -> Unit) {
     var hour by remember { mutableIntStateOf(7) }
     var minute by remember { mutableIntStateOf(30) }
-    Column(Modifier.fillMaxSize().padding(18.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Row(Modifier.fillMaxWidth()) { CasaBack(onBack) }
         Spacer(Modifier.height(8.dp))
         Text("Despertador", color = InkBrown, fontSize = 32.sp, fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth())
@@ -528,7 +568,7 @@ private fun Step(label: String, value: Int, onDelta: (Int) -> Unit) {
 
 @Composable
 internal fun CasaDisambiguate(candidates: List<Contact>, onBack: () -> Unit, onPick: (Contact) -> Unit) {
-    Column(Modifier.fillMaxSize().padding(18.dp)) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp)) {
         CasaBack(onBack)
         Spacer(Modifier.height(12.dp))
         Text("Qual destas pessoas?", color = InkBrown, fontSize = 30.sp, fontWeight = FontWeight.Bold)
@@ -556,7 +596,7 @@ internal fun CasaDisambiguate(candidates: List<Contact>, onBack: () -> Unit, onP
 
 @Composable
 internal fun CasaMockCall(name: String, onHangup: () -> Unit) {
-    Column(Modifier.fillMaxSize().padding(18.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Text("A ligar…", color = Muted, fontSize = 18.sp)
         Spacer(Modifier.height(8.dp))
         Text(name, color = InkBrown, fontSize = 36.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
